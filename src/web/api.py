@@ -58,6 +58,21 @@ def create_event():
 
 	return {"STATUS": "SUCCESS"}, 200
 
+@app.route("/api/event/update", methods=["POST"])
+def update_event():
+	"""
+	Update an event.
+	"""
+
+	try:
+		Event.query.filter_by(id=request.json["id"]).update(request.json)
+		db.session.commit()
+	except Exception as e:
+		print(e)
+		return {"STATUS": "FAILURE"}, 500
+
+	return {"STATUS": "SUCCESS"}, 200
+
 @app.route("/api/event/delete", methods=["POST"])
 def delete_event():
 	"""
