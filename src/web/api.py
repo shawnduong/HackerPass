@@ -69,10 +69,10 @@ def update_event():
 	"""
 
 	try:
-		Event.query.filter_by(id=request.json["id"]).update(request.json)
+		assert (e:=Event.query.filter_by(id=request.json["id"])).first() is not None
+		e.update(request.json)
 		db.session.commit()
-	except Exception as e:
-		print(e)
+	except:
 		return {"STATUS": "FAILURE"}, 500
 
 	return {"STATUS": "SUCCESS"}, 200
@@ -84,7 +84,8 @@ def delete_event():
 	"""
 
 	try:
-		Event.query.filter_by(id=request.json["id"]).delete()
+		assert (e:=Event.query.filter_by(id=request.json["id"])).first() is not None
+		e.delete()
 		db.session.commit()
 	except:
 		return {"STATUS": "FAILURE"}, 500
