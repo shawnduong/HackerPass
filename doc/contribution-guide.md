@@ -152,4 +152,3 @@ This task list may be incomplete and will be updated. Completed tasks will be re
   - Send a POST request to the web API.
 - `cli`: Write to cards from a file.
 - `web`: Create front-end where users can check their points.
-- `web`: Create some kind of authentication mechanism for API calls.
