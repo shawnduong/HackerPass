@@ -9,11 +9,11 @@ class User(db.Model):
 
 	id      = db.Column(db.Integer, primary_key=True)
 	cardID  = db.Column(db.Integer    , unique=True , nullable=False)
-	name    = db.Column(db.String(256), unique=False, nullable=False)
-	email   = db.Column(db.String(256), unique=False, nullable=False)
+	name    = db.Column(db.String(256), unique=False, nullable=True )
+	email   = db.Column(db.String(256), unique=False, nullable=True )
 	points  = db.Column(db.Integer    , unique=False, nullable=False)
 
-	def __init__(self, cardID=0, name="", email="", points=0):
+	def __init__(self, cardID=0, name=None, email=None, points=0):
 		"""
 		Constructor method for User type objects.
 		"""

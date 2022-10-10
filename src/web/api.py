@@ -1,66 +1,105 @@
 from app import *
 from sqlalchemy import *
 
-@app.route("/api/user", methods=["GET"])
+from keys import HP_KEYS
+
+@app.route("/api/hp/user", methods=["GET"])
 def get_users():
 	"""
-	Return a JSON list of users' IDs.
+	Return a list of all user card IDs.
 	"""
 
-	return {"USERS": [u.cardID for u in User.query.all()]}, 200
+	try:
+		assert request.json["key"] in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
 
-@app.route("/api/user/<cardID>", methods=["GET"])
+	try:
+		return {
+			"Status": "Success.",
+			"CardIDs": [u.cardID for u in User.query.all()]
+		}, 200
+	except:
+		return {"Status": "Failure."}, 500
+
+@app.route("/api/hp/user/<cardID>", methods=["GET"])
 def get_user(cardID):
 	"""
-	Return a JSON dictionary of everything about a specific user.
+	Return everything about a specific user.
 	"""
+
+	try:
+		assert request.json["key"] in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
 
 	try:
 		user = User.query.filter_by(cardID=cardID).first()
 		assert user is not None
 		user.update_points()
+		return {
+			"Status": "Success.",
+			cardID: {k:v for k,v in user.__dict__.items() if k != "_sa_instance_state"}
+		}, 200
+	except AssertionError:
+		return {"Status": "User does not exist."}, 404
 	except:
-		return {"STATUS": "FAILURE"}, 500
+		return {"Status": "Failure."}, 500
 
-	return {cardID: {k:v for k,v in user.__dict__.items() if k != "_sa_instance_state"}}, 200
-
-@app.route("/api/user/create", methods=["POST"])
+@app.route("/api/hp/user/create", methods=["POST"])
 def create_user():
 	"""
-	Create a new user with some cardID, name, and email.
+	Create a new user with some card ID. Name and email fields are filled out
+	by the user later on after registration.
 	"""
 
 	try:
-		user = User(
-			request.json["cardID"],
-			request.json["name"],
-			request.json["email"]
-		)
+		assert request.json["key"] in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
+
+	try:
+		assert User.query.filter_by(cardID=request.json["cardID"]).first() is None
+		user = User(request.json["cardID"])
 		db.session.add(user)
 		db.session.commit()
+		return {"Status": "User created."}, 200
+	except AssertionError:
+		return {"Status": "User already exists."}, 400
 	except:
-		return {"STATUS": "FAILURE"}, 500
+		return {"Status": "Failure."}, 500
 
-	return {"STATUS": "SUCCESS"}, 200
-
-@app.route("/api/event", methods=["GET"])
+@app.route("/api/hp/event", methods=["GET"])
 def get_events():
 	"""
 	Return a JSON list of all events.
 	"""
+
+	try:
+		assert request.json["key"] in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
 
 	events = []
 
 	for e in Event.query.all():
 		events.append({k:v for k,v in e.__dict__.items() if k != "_sa_instance_state"})
 
-	return {"EVENTS": events}, 200
+	return {
+		"Status": "Success.",
+		"Events": events
+	}, 200
 
-@app.route("/api/event/create", methods=["POST"])
+@app.route("/api/hp/event/create", methods=["POST"])
 def create_event():
 	"""
 	Create a new event with some number of associated points.
 	"""
+
+	try:
+		assert request.json["key"] in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
 
 	try:
 		event = Event(
@@ -72,57 +111,81 @@ def create_event():
 		)
 		db.session.add(event)
 		db.session.commit()
+		return {"Status": "Event created."}, 200
 	except:
-		return {"STATUS": "FAILURE"}, 500
+		return {"Status": "Failure."}, 500
 
-	return {"STATUS": "SUCCESS"}, 200
-
-@app.route("/api/event/update", methods=["POST"])
+@app.route("/api/hp/event/update", methods=["POST"])
 def update_event():
 	"""
 	Update an event.
 	"""
 
 	try:
+		assert request.json["key"] in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
+
+	request.json.pop("key")
+
+	try:
 		assert (e:=Event.query.filter_by(id=request.json["id"])).first() is not None
 		e.update(request.json)
 		db.session.commit()
-	except:
-		return {"STATUS": "FAILURE"}, 500
+		return {"Status": "Event updated."}, 200
+	except AssertionError:
+		return {"Status": "Event could not be found."}, 400
+	except Exception as e:
+		return {"Status": "Failure."}, 500
 
-	return {"STATUS": "SUCCESS"}, 200
 
-@app.route("/api/event/delete", methods=["POST"])
+@app.route("/api/hp/event/delete", methods=["POST"])
 def delete_event():
 	"""
 	Delete an event based on its ID.
 	"""
 
 	try:
+		assert request.json["key"] in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
+
+	try:
 		assert (e:=Event.query.filter_by(id=request.json["id"])).first() is not None
 		e.delete()
 		db.session.commit()
+		return {"Status": "Event deleted."}, 200
+	except AssertionError:
+		return {"Status": "Event could not be found."}, 400
 	except:
-		return {"STATUS": "FAILURE"}, 500
+		return {"Status": "Failure."}, 500
 
-	return {"STATUS": "SUCCESS"}, 200
-
-@app.route("/api/attendance/create", methods=["POST"])
+@app.route("/api/hp/attendance/create", methods=["POST"])
 def create_attendance():
 	"""
 	Create an attendance for a user.
 	"""
 
 	try:
+		assert request.json["key"] in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
+
+	try:
 		user = User.query.filter_by(cardID=request.json["user"]).first()
 		event = Event.query.filter_by(id=request.json["event"]).first()
 		assert user is not None and event is not None
+	except:
+		return {"Status": "User or event could not be found,"}, 400
+
+	try:
 		assert Attendance.query.filter_by(user=user.id, event=event.id).first() is None
 		attendance = Attendance(user.id, event.id)
 		db.session.add(attendance)
 		db.session.commit()
+		return {"Status": "Attendance created."}, 200
+	except AssertionError:
+		return {"Status": "Attendance already exists."}, 400
 	except:
-		return {"STATUS": "FAILURE"}, 500
-
-	return {"STATUS": "SUCCESS"}, 200
+		return {"Status": "Failure."}, 500
 
