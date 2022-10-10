@@ -151,7 +151,7 @@ This task list may be incomplete and will be updated. Completed tasks will be re
 - `cli`: Provision cards.
   - Send a POST request to the web API.
 - `cli`: Write to cards from a file.
-- `web`: Respond to POST requests for card provisioning.
 - `web`: Respond to POST requests for card updating.
   - Check if a card is valid, and respond with a success if the points were successfully added. If invalid, respond with an error.
 - `web`: Create front-end where users can check their points.
+- `web`: Create some kind of authentication mechanism for API calls.
