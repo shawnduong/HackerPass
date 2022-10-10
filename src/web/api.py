@@ -12,11 +12,15 @@ def get_users():
 @app.route("/api/user/create", methods=["POST"])
 def create_user():
 	"""
-	Create a new user with some cardID.
+	Create a new user with some cardID, name, and email.
 	"""
 
 	try:
-		user = User(request.json["cardID"])
+		user = User(
+			request.json["cardID"],
+			request.json["name"],
+			request.json["email"]
+		)
 		db.session.add(user)
 		db.session.commit()
 	except:
