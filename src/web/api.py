@@ -9,6 +9,20 @@ def get_users():
 
 	return {"USERS": [u.cardID for u in User.query.all()]}, 200
 
+@app.route("/api/user/<cardID>", methods=["GET"])
+def get_user(cardID):
+	"""
+	Return a JSON dictionary of everything about a specific user.
+	"""
+
+	try:
+		user = User.query.filter_by(cardID=cardID).first()
+		assert user is not None
+	except:
+		return {"STATUS": "FAILURE"}, 500
+
+	return {cardID: {k:v for k,v in user.__dict__.items() if k != "_sa_instance_state"}}, 200
+
 @app.route("/api/user/create", methods=["POST"])
 def create_user():
 	"""
