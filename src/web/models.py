@@ -23,6 +23,18 @@ class User(db.Model):
 		self.email   = email
 		self.points  = points
 
+	def update_points(self):
+		"""
+		Update the user's points as the sum of their attendances.
+		"""
+
+		self.points = 0
+		attendances = Attendance.query.filter_by(user=self.id).all()
+
+		for attendance in attendances:
+			event = Event.query.filter_by(id=attendance.event).first()
+			self.points += event.points
+
 class Event(db.Model):
 	"""
 	A definition for a single event, consisting of a unique event ID (id),

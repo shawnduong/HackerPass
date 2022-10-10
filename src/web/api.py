@@ -18,6 +18,7 @@ def get_user(cardID):
 	try:
 		user = User.query.filter_by(cardID=cardID).first()
 		assert user is not None
+		user.update_points()
 	except:
 		return {"STATUS": "FAILURE"}, 500
 
@@ -100,6 +101,25 @@ def delete_event():
 	try:
 		assert (e:=Event.query.filter_by(id=request.json["id"])).first() is not None
 		e.delete()
+		db.session.commit()
+	except:
+		return {"STATUS": "FAILURE"}, 500
+
+	return {"STATUS": "SUCCESS"}, 200
+
+@app.route("/api/attendance/create", methods=["POST"])
+def create_attendance():
+	"""
+	Create an attendance for a user.
+	"""
+
+	try:
+		user = User.query.filter_by(cardID=request.json["user"]).first()
+		event = Event.query.filter_by(id=request.json["event"]).first()
+		assert user is not None and event is not None
+		assert Attendance.query.filter_by(user=user.id, event=event.id).first() is None
+		attendance = Attendance(user.id, event.id)
+		db.session.add(attendance)
 		db.session.commit()
 	except:
 		return {"STATUS": "FAILURE"}, 500
