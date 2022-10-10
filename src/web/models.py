@@ -2,7 +2,7 @@ from app import db
 
 class User(db.Model):
 	"""
-	A definition for a single user, consisting of a card ID and points.
+	A definition for a single user, consisting of a unique card ID and points.
 	"""
 
 	__tablename__ = "user"
@@ -18,4 +18,30 @@ class User(db.Model):
 
 		self.cardID = cardID
 		self.points = points
+
+class Event(db.Model):
+	"""
+	A definition for a single event, consisting of a unique event ID (id),
+	points reward, a title, about, room, and author(s).
+	"""
+
+	__tablename__ = "event"
+
+	id      = db.Column(db.Integer, primary_key=True)
+	points  = db.Column(db.Integer    , unique=False, nullable=False)
+	title   = db.Column(db.String(256), unique=False, nullable=False)
+	about   = db.Column(db.String(256), unique=False, nullable=False)
+	room    = db.Column(db.String(256), unique=False, nullable=False)
+	author  = db.Column(db.String(256), unique=False, nullable=False)
+
+	def __init__(self, points=0, title="", about="", room="", author=""):
+		"""
+		Constructor method for Event type objects.
+		"""
+
+		self.points  = points
+		self.title   = title
+		self.about   = about
+		self.room    = room
+		self.author  = author
 
