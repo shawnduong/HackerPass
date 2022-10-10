@@ -45,3 +45,22 @@ class Event(db.Model):
 		self.room    = room
 		self.author  = author
 
+class Attendance(db.Model):
+	"""
+	A definition for a single attendance, relating a User to an Event.
+	"""
+
+	__tablename__ = "attendance"
+
+	id     = db.Column(db.Integer, primary_key=True)
+	user   = db.Column(db.Integer, db.ForeignKey(User.id) , unique=False, nullable=False)
+	event  = db.Column(db.Integer, db.ForeignKey(Event.id), unique=False, nullable=False)
+
+	def __init__(self, user=0, event=0):
+		"""
+		Constructor method for Attendance type objects.
+		"""
+
+		self.user  = user
+		self.event = event
+
