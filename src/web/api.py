@@ -58,3 +58,17 @@ def create_event():
 
 	return {"STATUS": "SUCCESS"}, 200
 
+@app.route("/api/event/delete", methods=["POST"])
+def delete_event():
+	"""
+	Delete an event based on its ID.
+	"""
+
+	try:
+		Event.query.filter_by(id=request.json["id"]).delete()
+		db.session.commit()
+	except:
+		return {"STATUS": "FAILURE"}, 500
+
+	return {"STATUS": "SUCCESS"}, 200
+
