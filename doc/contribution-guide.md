@@ -149,11 +149,9 @@ This task list may be incomplete and will be updated. Completed tasks will be re
   - Response from GET: list of all valid cards.
 - `ino`: Cache valid cards.
 - `cli`: Provision cards.
+  - Send a POST request to the web API.
 - `cli`: Write to cards from a file.
-- `web`: Provision cards.
-- `web`: Create a database of cards for an event and their points.
-- `web`: Respond to POST requests.
+- `web`: Respond to POST requests for card provisioning.
+- `web`: Respond to POST requests for card updating.
   - Check if a card is valid, and respond with a success if the points were successfully added. If invalid, respond with an error.
-- `web`: Respond to GET requests.
-  - Dump the array of valid card IDs.
 - `web`: Create front-end where users can check their points.
