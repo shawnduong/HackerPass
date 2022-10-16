@@ -4,7 +4,7 @@
 #include <ESP8266HTTPClient.h>
 
 /* GET some host+path with a key and write the output to code, response. */
-void get(String host, String path, uint32_t key, uint16_t *code, String *response)
+void get(String host, String path, uint64_t key, uint16_t *code, String *response)
 {
 	WiFiClient client;
 	HTTPClient http;

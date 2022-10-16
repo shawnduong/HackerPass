@@ -1,11 +1,11 @@
 # Flask secret key.
 FLASK_SECRET_KEY = "YOUR_KEY_HERE"
 
-# HackerPass unit keys. Replace these with randomly generated, secret 32-bit
+# HackerPass unit keys. Replace these with randomly generated, secret 64-bit
 # keys on each HackerPass unit.
 HP_KEYS = [
-	0x00000000,
-	0x00000001,
-	0x00000002,
-	0x00000003,
+	0x0000000000000000,
+	0x0000000000000001,
+	0x0000000000000002,
+	0x0000000000000003,
 ]

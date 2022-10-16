@@ -9,4 +9,4 @@
 #define API       "https://api.website.here"
 
 /* Unique identification key for this particular unit. */
-#define HP_KEY    0x00000000
+#define HP_KEY    0x0000000000000000
