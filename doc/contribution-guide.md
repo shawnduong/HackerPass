@@ -139,10 +139,11 @@ This task list may be incomplete and will be updated. Completed tasks will be re
   - Blink LED B yellow if card is reading and waiting for a response.
   - Blink LED B green if in ad hoc provision mode and card is done being provisioned.
 - `ino`: Write text to a 1602 LCD display.
-- `ino`: Send POST and GET requests to a web API.
+- ~~`ino`: Send POST and GET requests to a web API.~~
+  - (Use `get` and `post` in [`/src/ino/HackerPass/include/api.h`](../src/ino/HackerPass/include/api.h).)
   - POST attendance points to a card.
   - GET valid cards (to update the cache).
-- `ino`: Receive web API responses.
+- ~~`ino`: Receive web API responses.~~
   - Response from POST: either the card is invalid, or the points were successfully added.
   - Response from GET: list of all valid cards.
 - `ino`: Cache valid cards.
