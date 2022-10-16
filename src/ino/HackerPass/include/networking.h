@@ -16,3 +16,9 @@ bool connect(char *ssid, char *password, uint16_t timeout)
 
 	return false;
 }
+
+/* Return true if connected to a Wi-Fi network. */
+bool is_connected()
+{
+	return (WiFi.status() == WL_CONNECTED);
+}
