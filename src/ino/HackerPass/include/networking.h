@@ -1,3 +1,6 @@
+#ifndef NETWORK_H
+#define NETWORK_H
+
 #include <ESP8266WiFi.h>
 
 #define POLL_INTERVAL 100  // ms
@@ -22,3 +25,5 @@ bool is_connected()
 {
 	return (WiFi.status() == WL_CONNECTED);
 }
+
+#endif
