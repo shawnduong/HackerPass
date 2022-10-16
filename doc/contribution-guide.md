@@ -138,8 +138,6 @@ This task list may be incomplete and will be updated. Completed tasks will be re
   - Blink LED B green if card is valid, red if invalid.
   - Blink LED B yellow if card is reading and waiting for a response.
   - Blink LED B green if in ad hoc provision mode and card is done being provisioned.
-- `ino`: Connect to a Wi-Fi network.
-- `ino`: Automatically reconnect to a Wi-Fi network if disconnected.
 - `ino`: Write text to a 1602 LCD display.
 - `ino`: Send POST and GET requests to a web API.
   - POST attendance points to a card.
