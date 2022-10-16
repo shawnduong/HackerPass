@@ -19,6 +19,9 @@ void loop()
 	if (!is_connected())
 	{
 		Serial.println("Not connected. Connecting now.");
+		Serial.print("MAC: ");
+		Serial.println(get_mac());
+
 		if (connect(SSID, PASSWORD, TIMEOUT))  Serial.println("Connection success.");
 		else                                   Serial.println("Connection failure.");
 	}

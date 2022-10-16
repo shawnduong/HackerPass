@@ -26,4 +26,10 @@ bool is_connected()
 	return (WiFi.status() == WL_CONNECTED);
 }
 
+/* Get the MAC address of the ESP8266. */
+String get_mac()
+{
+	return WiFi.macAddress();
+}
+
 #endif
