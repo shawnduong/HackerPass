@@ -4,3 +4,6 @@
 
 /* How long in ms to wait for a connection. */
 #define TIMEOUT  5000
+
+/* API location. */
+#define API      "https://api.website.here/"
