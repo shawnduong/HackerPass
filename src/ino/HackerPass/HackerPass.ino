@@ -5,10 +5,12 @@
 /* HTTP response code and response data buffers. */
 uint16_t code;
 String response;
+uint16_t counter;  // Debugging.
 
 void setup()
 {
 	Serial.begin(9600);
+	counter = 0;
 }
 
 void loop()
@@ -22,9 +24,13 @@ void loop()
 	}
 
 	/* Debugging. */
+	post(API, "/api/hp/user/create", HP_KEY, &code, &response, "{\"cardID\":"+String(counter)+"}");
+	Serial.println(code);
+	Serial.println(response);
 	get(API, "/api/hp/user", HP_KEY, &code, &response);
 	Serial.println(code);
 	Serial.println(response);
+	counter++;
 
 	delay(1000);
 }

@@ -16,4 +16,18 @@ void get(String host, String path, uint64_t key, uint16_t *code, String *respons
 	http.end();
 }
 
+/* POST JSON data to a host+path with a key and write the output to a code, response. */
+void post(String host, String path, uint64_t key, uint16_t *code, String *response, String data)
+{
+	WiFiClient client;
+	HTTPClient http;
+	String url = host + path + "?key=" + String(key);
+
+	http.begin(client, url);
+	http.addHeader("Content-Type", "application/json");
+	*code = http.POST(data);
+	*response = http.getString();
+	http.end();
+}
+
 #endif
