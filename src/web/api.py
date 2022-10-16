@@ -10,7 +10,7 @@ def get_users():
 	"""
 
 	try:
-		assert request.json["key"] in HP_KEYS
+		assert int(request.args.get("key")) in HP_KEYS
 	except:
 		return {"Status": "Authentication invalid."}, 403
 
@@ -29,7 +29,7 @@ def get_user(cardID):
 	"""
 
 	try:
-		assert request.json["key"] in HP_KEYS
+		assert int(request.args.get("key")) in HP_KEYS
 	except:
 		return {"Status": "Authentication invalid."}, 403
 
@@ -54,7 +54,7 @@ def create_user():
 	"""
 
 	try:
-		assert request.json["key"] in HP_KEYS
+		assert int(request.args.get("key")) in HP_KEYS
 	except:
 		return {"Status": "Authentication invalid."}, 403
 
@@ -76,7 +76,7 @@ def get_events():
 	"""
 
 	try:
-		assert request.json["key"] in HP_KEYS
+		assert int(request.args.get("key")) in HP_KEYS
 	except:
 		return {"Status": "Authentication invalid."}, 403
 
@@ -97,7 +97,7 @@ def create_event():
 	"""
 
 	try:
-		assert request.json["key"] in HP_KEYS
+		assert int(request.args.get("key")) in HP_KEYS
 	except:
 		return {"Status": "Authentication invalid."}, 403
 
@@ -122,7 +122,7 @@ def update_event():
 	"""
 
 	try:
-		assert request.json["key"] in HP_KEYS
+		assert int(request.args.get("key")) in HP_KEYS
 	except:
 		return {"Status": "Authentication invalid."}, 403
 
@@ -146,7 +146,7 @@ def delete_event():
 	"""
 
 	try:
-		assert request.json["key"] in HP_KEYS
+		assert int(request.args.get("key")) in HP_KEYS
 	except:
 		return {"Status": "Authentication invalid."}, 403
 
@@ -167,7 +167,7 @@ def create_attendance():
 	"""
 
 	try:
-		assert request.json["key"] in HP_KEYS
+		assert int(request.args.get("key")) in HP_KEYS
 	except:
 		return {"Status": "Authentication invalid."}, 403
 
