@@ -129,7 +129,6 @@ All of these conventions are to have uniform and predictable patterns, as well a
 
 This task list may be incomplete and will be updated. Completed tasks will be removed from this list.
 
-- `ino`: Read IDs from cards.
 - `ino`: Write data from a file to all blocks of a card.
 - `ino`: Blink two RGB LEDs green, yellow, red, white, or purple.
   - Blink LED A white if ready to read a card, Wi-Fi connected.
@@ -140,11 +139,8 @@ This task list may be incomplete and will be updated. Completed tasks will be re
   - Blink LED B green if in ad hoc provision mode and card is done being provisioned.
 - `ino`: Write text to a 1602 LCD display.
 - ~~`ino`: Send POST and GET requests to a web API.~~
-  - (Use `get` and `post` in [`/src/ino/HackerPass/include/api.h`](../src/ino/HackerPass/include/api.h).)
-  - POST attendance points to a card.
   - GET valid cards (to update the cache).
 - ~~`ino`: Receive web API responses.~~
-  - Response from POST: either the card is invalid, or the points were successfully added.
   - Response from GET: list of all valid cards.
 - `ino`: Cache valid cards.
 - `cli`: Provision cards.
