@@ -16,5 +16,8 @@ db = SQLAlchemy(app)
 from models import *
 db.create_all()
 
+# Website routes.
+from routes import *
+
 # API endpoints.
 from api import *
