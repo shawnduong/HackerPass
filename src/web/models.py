@@ -1,6 +1,11 @@
+from __future__ import annotations
+
 from app import db
 
-class User(db.Model):
+from flask_login import UserMixin
+from typing import Union
+
+class User(UserMixin, db.Model):
 	"""
 	A definition for a single user, consisting of a unique card ID and points.
 	"""
@@ -22,6 +27,23 @@ class User(db.Model):
 		self.name    = name
 		self.email   = email
 		self.points  = points
+
+	def login(cardID: str) -> Union[User, bool]:
+		"""
+		Check if a cardID string is valid and return the User if so. Else,
+		return False.
+		"""
+
+		# Convert the cardID string from hex to an integer.
+		try:
+			intCardID = int(cardID, 16)
+		except:
+			return False
+
+		if ((user:=User.query.filter_by(cardID=intCardID).first()) != None):
+			return user
+
+		return False
 
 	def update_points(self):
 		"""

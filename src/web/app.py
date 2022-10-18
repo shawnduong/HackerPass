@@ -2,6 +2,7 @@ import sys
 
 from flask import *
 from flask_sqlalchemy import *
+from flask_login import LoginManager, current_user, login_user, logout_user
 
 from keys import FLASK_SECRET_KEY
 
@@ -15,6 +16,9 @@ app.secret_key = FLASK_SECRET_KEY
 db = SQLAlchemy(app)
 from models import *
 db.create_all()
+
+# Authentication.
+from authentication import *
 
 # Website routes.
 from routes import *
