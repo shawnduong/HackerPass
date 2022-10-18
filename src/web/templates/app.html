@@ -5,6 +5,26 @@
 
 <body>
 
-	<h1>Welcome</h1>
+	{% if current_user.name != None %}
+		<h1>Welcome {{ current_user.name}}</h1>
+	{% else %}
+		<h1>Welcome {{ current_user.cardID }}</h1>
+	{% endif %}
+
+	{% if current_user.name == None %}
+		<form id="user-update-name" action="NOT_IMPLEMENTED" method="POST">
+			<label for="name">Name:</label>
+			<input type="text" id="name" name="name">
+			<button id="user-update-name-submit">Submit</button>
+		</form>
+	{% endif %}
+
+	{% if current_user.email == None %}
+		<form id="user-update-email" action="NOT_IMPLEMENTED" method="POST">
+			<label for="email">Email:</label>
+			<input type="text" id="email" name="email">
+			<button id="user-update-email-submit">Submit</button>
+		</form>
+	{% endif %}
 
 </body>

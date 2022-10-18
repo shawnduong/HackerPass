@@ -11,6 +11,9 @@
 		<label for="cardID">Card ID:</label>
 		<input type="text" id="cardID" name="cardID">
 		<button id="login-submit">Log In</button>
+		{% if failed %}
+			<h5>Invalid card ID. Try again.</h5>
+		{% endif %}
 	</form>
 
 </body>
