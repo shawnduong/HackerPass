@@ -23,5 +23,8 @@ from authentication import *
 # Website routes.
 from routes import *
 
-# API endpoints.
+# API endpoints, used by HackerPass units.
 from api import *
+
+# AJAX endpoints, used by web app users.
+from ajax import *
