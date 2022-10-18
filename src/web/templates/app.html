@@ -5,26 +5,34 @@
 
 <body>
 
+	<script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}" defer></script>
+	<script src="{{ url_for('static', filename='js/ajax.js') }}" defer></script>
+
 	{% if current_user.name != None %}
-		<h1>Welcome {{ current_user.name}}</h1>
+		<h1 id="user-name">{{ current_user.name }}</h1>
 	{% else %}
-		<h1>Welcome {{ current_user.cardID }}</h1>
+		<h1 id="user-name">HackerPass</h1>
 	{% endif %}
 
-	{% if current_user.name == None %}
-		<form id="user-update-name" action="/ajax/user/update/name" method="POST">
-			<label for="name">Name:</label>
-			<input type="text" id="name" name="name">
-			<button id="user-update-name-submit">Submit</button>
-		</form>
+	{% if current_user.email != None %}
+		<h1 id="user-email">{{ current_user.email }}</h1>
+	{% else %}
+		<h1 id="user-email">Email not set.</h1>
 	{% endif %}
 
-	{% if current_user.email == None %}
-		<form id="user-update-email" action="/ajax/user/update/email" method="POST">
-			<label for="email">Email:</label>
-			<input type="email" id="email" name="email">
-			<button id="user-update-email-submit">Submit</button>
-		</form>
-	{% endif %}
+	<h2>Account Info</h2>
 
+	<p>Points: <span id="user-points">{{ current_user.points }}</span></p>
+
+	<h2>Update Info</h2>
+
+	<form id="user-update-name">
+		<input type="text" id="user-update-name-field" name="name" placeholder="Name">
+		<input type="submit" value="✓">
+	</form>
+
+	<form id="user-update-email">
+		<input type="email" id="user-update-email-field" name="email" placeholder="Email">
+		<input type="submit" value="✓">
+	</form>
 </body>
