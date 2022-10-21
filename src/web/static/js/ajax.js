@@ -1,10 +1,10 @@
 /* Polling interval for updates. */
-const INTERVAL = 1000;
+const INTERVAL = 5000;
 
 /* Begin periodic AJAX updates after the document is ready. */
 $(document).ready(function()
 {
-	setTimeout(update, INTERVAL);
+	update();
 });
 
 /* Update the application using AJAX by sending a query. */
