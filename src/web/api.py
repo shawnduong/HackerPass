@@ -37,6 +37,7 @@ def get_user(cardID):
 		user = User.query.filter_by(cardID=cardID).first()
 		assert user is not None
 		user.update_points()
+		user = User.query.filter_by(cardID=cardID).first()
 		return {
 			"Status": "Success.",
 			cardID: {k:v for k,v in user.__dict__.items() if k != "_sa_instance_state"}

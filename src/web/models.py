@@ -57,6 +57,8 @@ class User(UserMixin, db.Model):
 			event = Event.query.filter_by(id=attendance.event).first()
 			self.points += event.points
 
+		db.session.commit()
+
 class Event(db.Model):
 	"""
 	A definition for a single event, consisting of a unique event ID (id),
