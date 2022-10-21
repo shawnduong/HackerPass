@@ -73,9 +73,10 @@ class Event(db.Model):
 	about   = db.Column(db.String(256), unique=False, nullable=False)
 	room    = db.Column(db.String(256), unique=False, nullable=False)
 	author  = db.Column(db.String(256), unique=False, nullable=False)
-	time    = db.Column(db.Integer    , unique=False, nullable=False)
+	start   = db.Column(db.Integer    , unique=False, nullable=False)
+	end     = db.Column(db.Integer    , unique=False, nullable=False)
 
-	def __init__(self, points=0, title="", about="", room="", author="", time=0):
+	def __init__(self, points=0, title="", about="", room="", author="", start=0, end=0):
 		"""
 		Constructor method for Event type objects.
 		"""
@@ -85,7 +86,8 @@ class Event(db.Model):
 		self.about   = about
 		self.room    = room
 		self.author  = author
-		self.time    = time
+		self.start   = start
+		self.end     = end
 
 class Attendance(db.Model):
 	"""

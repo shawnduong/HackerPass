@@ -109,7 +109,8 @@ def create_event():
 			request.json["about"],
 			request.json["room"],
 			request.json["author"],
-			request.json["time"],
+			request.json["start"],
+			request.json["end"],
 		)
 		db.session.add(event)
 		db.session.commit()
