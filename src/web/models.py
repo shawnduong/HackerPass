@@ -62,7 +62,7 @@ class User(UserMixin, db.Model):
 class Event(db.Model):
 	"""
 	A definition for a single event, consisting of a unique event ID (id),
-	points reward, a title, about, room, and author(s).
+	points reward, a title, about, room, author(s), and epoch timestamp.
 	"""
 
 	__tablename__ = "event"
@@ -73,8 +73,9 @@ class Event(db.Model):
 	about   = db.Column(db.String(256), unique=False, nullable=False)
 	room    = db.Column(db.String(256), unique=False, nullable=False)
 	author  = db.Column(db.String(256), unique=False, nullable=False)
+	time    = db.Column(db.Integer    , unique=False, nullable=False)
 
-	def __init__(self, points=0, title="", about="", room="", author=""):
+	def __init__(self, points=0, title="", about="", room="", author="", time=0):
 		"""
 		Constructor method for Event type objects.
 		"""
@@ -84,6 +85,7 @@ class Event(db.Model):
 		self.about   = about
 		self.room    = room
 		self.author  = author
+		self.time    = time
 
 class Attendance(db.Model):
 	"""
