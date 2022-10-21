@@ -40,8 +40,15 @@ def app_user_info():
 
 	try:
 		User.query.get(current_user.id).update_points()
+		events = [{k:v for k,v in e.__dict__.items() if k != "_sa_instance_state"}
+			for e in Event.query.all()]
+		attendances = [{k:v for k,v in e.__dict__.items() if k != "_sa_instance_state"}
+			for e in Attendance.query.filter_by(user=current_user.id)]
+
 		return {
 			"Points": User.query.get(current_user.id).points,
+			"Events": events,
+			"Attendances": attendances,
 			"Status": "Success."
 		}, 200
 	except:
