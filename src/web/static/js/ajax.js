@@ -1,3 +1,31 @@
+/* Polling interval for updates. */
+const INTERVAL = 1000;
+
+/* Begin periodic AJAX updates after the document is ready. */
+$(document).ready(function()
+{
+	setTimeout(update, INTERVAL);
+});
+
+/* Update the application using AJAX by sending a query. */
+function update()
+{
+	$.ajax(
+	{
+		url: "/ajax/user/info",
+		type: "GET",
+		dataType: "json",
+		success: function(response)
+		{
+			$("#user-points").html(response.Points);
+		},
+		complete: function()
+		{
+			setTimeout(update, INTERVAL);
+		}
+	});
+}
+
 $("#user-update-name").submit(function()
 {
 	if ($("#user-update-name-field").val() == "")  return;

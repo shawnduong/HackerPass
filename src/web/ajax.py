@@ -38,5 +38,12 @@ def app_user_info():
 	well as upcoming events.
 	"""
 
-	pass
+	try:
+		User.query.get(current_user.id).update_points()
+		return {
+			"Points": User.query.get(current_user.id).points,
+			"Status": "Success."
+		}, 200
+	except:
+		return {"Status": "Failure."}, 500
 
