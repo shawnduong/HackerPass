@@ -134,6 +134,7 @@ This task list may be incomplete and will be updated. Completed tasks will be re
 - `ino`: Blink the onboard NodeMCU LED blue if not connected to Wi-Fi.
 - `ino`: Hold the external RGB LED purple if in ad hoc provision mode.
 - `ino`: Hold the external RGB LED white if ready to read a card.
+- `ino`: Hold the external RGB LED red if ready there is no event associated with the unit.
 - `ino`: Blink the external RGB LED green if in ad hoc provision mode and card is provisioned.
 - `ino`: Blink the external RGB LED green if card, attendance valid.
 - `ino`: Blink the external RGB LED red if card, attendance invalid.
