@@ -129,21 +129,23 @@ All of these conventions are to have uniform and predictable patterns, as well a
 
 This task list may be incomplete and will be updated. Completed tasks will be removed from this list.
 
-- `ino`: Write data from a file to all blocks of a card.
-- `ino`: Blink two RGB LEDs green, yellow, red, white, or purple.
-  - Blink LED A white if ready to read a card, Wi-Fi connected.
-  - Blink LED A yellow if connecting, red if unable to connect.
-  - Blink LED A purple if in ad hoc provision mode.
-  - Blink LED B green if card is valid, red if invalid.
-  - Blink LED B yellow if card is reading and waiting for a response.
-  - Blink LED B green if in ad hoc provision mode and card is done being provisioned.
-- `ino`: Write text to a 1602 LCD display.
+- `ino`: Implement ad hoc provision mode.
+- `ino`: Blink the onboard ESP LED blue if Wi-Fi connecting, hold blue if connected.
+- `ino`: Blink the onboard NodeMCU LED blue if not connected to Wi-Fi.
+- `ino`: Hold the external RGB LED purple if in ad hoc provision mode.
+- `ino`: Hold the external RGB LED white if ready to read a card.
+- `ino`: Blink the external RGB LED green if in ad hoc provision mode and card is provisioned.
+- `ino`: Blink the external RGB LED green if card, attendance valid.
+- `ino`: Blink the external RGB LED red if card, attendance invalid.
 - ~~`ino`: Send POST and GET requests to a web API.~~
   - GET valid cards (to update the cache).
 - ~~`ino`: Receive web API responses.~~
   - Response from GET: list of all valid cards.
 - `ino`: Cache valid cards.
+- `web`: Create front-end where users can check their points.
+
+**Additional Features**
+- `ino`: Write data from a file to all blocks of a card.
 - `cli`: Provision cards.
   - Send a POST request to the web API.
 - `cli`: Write to cards from a file.
-- `web`: Create front-end where users can check their points.
