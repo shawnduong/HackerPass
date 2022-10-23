@@ -130,10 +130,9 @@ All of these conventions are to have uniform and predictable patterns, as well a
 This task list may be incomplete and will be updated. Completed tasks will be removed from this list.
 
 - `ino`: Implement ad hoc provision mode.
-- `ino`: Blink the onboard ESP LED blue if Wi-Fi connecting, hold blue if connected. If not connected, turn the LED off.
 - `ino`: Hold the external RGB LED purple if in ad hoc provision mode.
 - `ino`: Hold the external RGB LED white if ready to read a card.
-- `ino`: Hold the external RGB LED red if ready there is no event associated with the unit.
+- `ino`: Hold the external RGB LED red if there is no event associated with the unit.
 - `ino`: Blink the external RGB LED green if in ad hoc provision mode and card is provisioned.
 - `ino`: Blink the external RGB LED green if card, attendance valid.
 - `ino`: Blink the external RGB LED red if card, attendance invalid.
