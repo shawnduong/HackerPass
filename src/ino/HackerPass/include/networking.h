@@ -2,6 +2,7 @@
 #define NETWORK_H
 
 #include <ESP8266WiFi.h>
+#include "led.h"
 
 #define POLL_INTERVAL 100  // ms
 
@@ -14,7 +15,11 @@ bool connect(char *ssid, char *password, uint16_t timeout)
 	for (uint8_t i = 0; i < timeout/POLL_INTERVAL; i++)
 	{
 		if (WiFi.status() == WL_CONNECTED)  return true;
-		delay(POLL_INTERVAL);
+
+		led_esp_on();
+		delay(POLL_INTERVAL/2);
+		led_esp_off();
+		delay(POLL_INTERVAL/2);
 	}
 
 	return false;

@@ -27,12 +27,22 @@ void loop()
 	/* Check for a network connection. Reconnect if disconnected. */
 	if (!is_connected())
 	{
+		led_esp_off();
 		Serial.println("Not connected. Connecting now.");
 		Serial.println("MAC: " + get_mac());
 
-		if (connect(SSID, PASSWORD, TIMEOUT))  Serial.println("Connection success.");
-		else                                   Serial.println("Connection failure.");
+		if (connect(SSID, PASSWORD, TIMEOUT))
+		{
+			Serial.println("Connection success.");
+			led_esp_on();
+		}
+		else
+		{
+			Serial.println("Connection failure.");
+			led_esp_off();
+		}
 	}
+	else  led_esp_on();
 
 	/* Debugging. */
 	if (read_uid(10, buffer, &len))
