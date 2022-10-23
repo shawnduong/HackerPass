@@ -1,6 +1,7 @@
 #include "include/api.h"
-#include "include/rc522.h"
+#include "include/led.h"
 #include "include/networking.h"
+#include "include/rc522.h"
 #include "config.h"
 
 /* HTTP response code and response data buffers. */
@@ -15,6 +16,7 @@ byte len;
 void setup()
 {
 	Serial.begin(9600);
+	led_init();
 	rc522_init();
 }
 
