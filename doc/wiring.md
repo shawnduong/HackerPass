@@ -8,5 +8,5 @@
 | MISO       | D6       |
 | IRQ        | (Unused) |
 | GND        | GND      |
-| RST        | D1       |
+| RST        | (Unused) |
 | 3.3V       | 3V       |
