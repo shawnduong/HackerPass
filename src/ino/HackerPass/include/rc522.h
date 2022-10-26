@@ -3,7 +3,8 @@
 
 #include <MFRC522.h>   // MFRC522 library by GithubCommunity.
 
-MFRC522 mfrc522(4, 5);
+/* RST is unused (255) to free up a pin. */
+MFRC522 mfrc522(4, 255);
 
 void rc522_init()
 {
