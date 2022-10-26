@@ -8,6 +8,8 @@
 	<script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}" defer></script>
 	<script src="{{ url_for('static', filename='js/ajax.js') }}" defer></script>
 
+	<a href="/logout">Log Out</a>
+
 	{% if current_user.name != None %}
 		<h1 id="user-name">{{ current_user.name }}</h1>
 	{% else %}

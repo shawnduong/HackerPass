@@ -1,6 +1,6 @@
 from app import *
 
-from flask_login import LoginManager, current_user, login_user, logout_user
+from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 
 # Define user login functionality.
 loginManager = LoginManager()
@@ -30,4 +30,14 @@ def login():
 
 	login_user(user)
 	return redirect(url_for("application"))
+
+@app.route("/logout", methods=["GET"])
+@login_required
+def logout():
+	"""
+	Log a user out of the application and take them to the index.
+	"""
+
+	logout_user()
+	return render_template("index.html")
 
