@@ -16,12 +16,13 @@ byte len;
 void setup()
 {
 	Serial.begin(9600);
-	led_init();
 	rc522_init();
+	led_init();
 }
 
 void loop()
 {
+	led_rgb_test();
 	id = 0;
 
 	/* Check for a network connection. Reconnect if disconnected. */
