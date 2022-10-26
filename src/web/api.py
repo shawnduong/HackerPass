@@ -179,7 +179,7 @@ def create_attendance():
 		event = Event.query.filter_by(id=request.json["event"]).first()
 		assert user is not None and event is not None
 	except:
-		return {"Status": "User or event could not be found,"}, 400
+		return {"Status": "User or event could not be found."}, 400
 
 	try:
 		assert Attendance.query.filter_by(user=user.id, event=event.id).first() is None
