@@ -91,6 +91,24 @@ def get_events():
 		"Events": events
 	}, 200
 
+@app.route("/api/hp/eventIDs", methods=["GET"])
+def get_event_ids():
+	"""
+	Return a JSON list of all event IDs.
+	"""
+
+	try:
+		assert int(request.args.get("key")) in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
+
+	events = sorted([e.eventID for e in Event.query.all()])
+
+	return {
+		"Status": "Success.",
+		"CardIDs": events
+	}, 200
+
 @app.route("/api/hp/event/create", methods=["POST"])
 def create_event():
 	"""
@@ -104,6 +122,7 @@ def create_event():
 
 	try:
 		event = Event(
+			request.json["eventID"],
 			request.json["points"],
 			request.json["title"],
 			request.json["about"],
@@ -176,7 +195,7 @@ def create_attendance():
 
 	try:
 		user = User.query.filter_by(cardID=request.json["user"]).first()
-		event = Event.query.filter_by(id=request.json["event"]).first()
+		event = Event.query.filter_by(eventID=request.json["event"]).first()
 		assert user is not None and event is not None
 	except:
 		return {"Status": "User or event could not be found."}, 400

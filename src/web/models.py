@@ -67,27 +67,29 @@ class Event(db.Model):
 
 	__tablename__ = "event"
 
-	id      = db.Column(db.Integer, primary_key=True)
-	points  = db.Column(db.Integer    , unique=False, nullable=False)
-	title   = db.Column(db.String(256), unique=False, nullable=False)
-	about   = db.Column(db.String(256), unique=False, nullable=False)
-	room    = db.Column(db.String(256), unique=False, nullable=False)
-	author  = db.Column(db.String(256), unique=False, nullable=False)
-	start   = db.Column(db.Integer    , unique=False, nullable=False)
-	end     = db.Column(db.Integer    , unique=False, nullable=False)
+	id       = db.Column(db.Integer, primary_key=True)
+	eventID  = db.Column(db.Integer    , unique=True , nullable=False)
+	points   = db.Column(db.Integer    , unique=False, nullable=False)
+	title    = db.Column(db.String(256), unique=False, nullable=False)
+	about    = db.Column(db.String(256), unique=False, nullable=False)
+	room     = db.Column(db.String(256), unique=False, nullable=False)
+	author   = db.Column(db.String(256), unique=False, nullable=False)
+	start    = db.Column(db.Integer    , unique=False, nullable=False)
+	end      = db.Column(db.Integer    , unique=False, nullable=False)
 
-	def __init__(self, points=0, title="", about="", room="", author="", start=0, end=0):
+	def __init__(self, eventID=0, points=0, title="", about="", room="", author="", start=0, end=0):
 		"""
 		Constructor method for Event type objects.
 		"""
 
-		self.points  = points
-		self.title   = title
-		self.about   = about
-		self.room    = room
-		self.author  = author
-		self.start   = start
-		self.end     = end
+		self.eventID  = eventID
+		self.points   = points
+		self.title    = title
+		self.about    = about
+		self.room     = room
+		self.author   = author
+		self.start    = start
+		self.end      = end
 
 class Attendance(db.Model):
 	"""
