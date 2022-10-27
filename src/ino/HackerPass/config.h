@@ -8,5 +8,9 @@
 /* API location. Do not include a trailing slash. */
 #define API       "https://api.website.here"
 
+/* Maximum number of events and users for some main event. */
+#define MAX_EVENTS  20
+#define MAX_USERS  100
+
 /* Unique identification key for this particular unit. */
 #define HP_KEY    0x0000000000000000

@@ -61,6 +61,13 @@ void led_rgb_white()
 	analogWrite(LED_RGB_B, 255);
 }
 
+void led_rgb_off()
+{
+	analogWrite(LED_RGB_R, 0);
+	analogWrite(LED_RGB_G, 0);
+	analogWrite(LED_RGB_B, 0);
+}
+
 void led_rgb_test()
 {
 	led_rgb_red();
@@ -72,6 +79,7 @@ void led_rgb_test()
 	led_rgb_purple();
 	delay(500);
 	led_rgb_white();
+	delay(500);
 }
 
 #endif
