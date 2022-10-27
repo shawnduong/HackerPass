@@ -1,3 +1,4 @@
+#include <ArduinoJson.h>  // ArduinoJson library by Benoit Blanchon.
 #include "include/algos.h"
 #include "include/api.h"
 #include "include/led.h"
@@ -17,6 +18,9 @@ bool provisioning;
 /* Buffers. */
 byte buffer[12];
 byte len;
+
+/* 1 KB allocated for JSON data buffer. */
+DynamicJsonDocument json(1024);
 
 /* Cached eventIDs and userIDs retrieved from the web. These are expected to be
    sorted web-side to offload computational cost as these will be b-searched. */
@@ -40,15 +44,36 @@ void setup()
 	provisioning = false;
 
 	/* Force a network connection to start. */
+	Serial.println("Connecting to a network.");
 	while (!connect(SSID, PASSWORD, TIMEOUT));
 	led_esp_on();
 
-	/* TODO: populate eventIDs and userIDs from the API. */
-	eventIDs[0] = 0x1479BC1F;  // Debugging value from prototype card.
-	lenEventIDs = 1;
+	Serial.println("Getting event IDs from API.");
+	while (true)
+	{
+		delay(500);
+		get(API, "/api/hp/event/ids", HP_KEY, &code, &response);
+
+		if (code != 200)
+			continue;
+
+		if (deserializeJson(json, response))
+			continue;
+
+		if (json["Status"] != "Success.")
+			continue;
+
+		lenEventIDs = json["CardIDs"].size();
+
+		for (uint8_t i = 0; i < lenEventIDs; i++)
+			eventIDs[i] = json["CardIDs"][i].as<uint32_t>();
+
+		break;
+	}
 
 	/* Wait for an organizer to tap an event association card. This phase lasts
 	   for a maximum time of 25.5 s, but will loop until successful. */
+	Serial.println("Waiting for event association.");
 	while (true)
 	{
 		if (!read_uid(255, buffer, &len))  continue;
@@ -57,8 +82,9 @@ void setup()
 		if (bsearch_id(id, eventIDs, lenEventIDs) < 0)
 		{
 			led_rgb_off();
-			delay(500);
+			delay(100);
 			led_rgb_red();
+			delay(100);
 		}
 		else
 		{
@@ -66,6 +92,9 @@ void setup()
 			break;
 		}
 	}
+
+	delay(1000);
+	Serial.println("Setup complete.");
 }
 
 void loop()

@@ -91,7 +91,7 @@ def get_events():
 		"Events": events
 	}, 200
 
-@app.route("/api/hp/eventIDs", methods=["GET"])
+@app.route("/api/hp/event/ids", methods=["GET"])
 def get_event_ids():
 	"""
 	Return a JSON list of all event IDs.
