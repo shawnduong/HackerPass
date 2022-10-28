@@ -25,6 +25,10 @@ uint16_t lenEventIDs;
 uint32_t userIDs[MAX_USERS];
 uint16_t lenUserIDs;
 
+/* Cached provisionerIDs retrieved from the web, likewise expected to be sorted. */
+uint32_t provisionerIDs[MAX_PROVISIONERS];
+uint16_t lenProvisionerIDs;
+
 void setup()
 {
 	Serial.begin(9600);
@@ -32,7 +36,7 @@ void setup()
 	led_esp_off();
 	led_init();
 	led_rgb_test();
-	led_rgb_red();
+	led_rgb_blink_to_red();
 
 	/* Initialize variables. */
 	eventID = 0;  // Edge case when actual card ID = 0 (p = 2e-10). p is
@@ -50,6 +54,9 @@ void setup()
 	Serial.println("Getting user IDs from API.");
 	get_ids(API, "/api/hp/user", HP_KEY, &lenUserIDs, userIDs);
 
+	Serial.println("Getting provisioner IDs from API.");
+	get_ids(API, "/api/hp/provisioner/ids", HP_KEY, &lenProvisionerIDs, provisionerIDs);
+
 	/* Wait for an organizer to tap an event association card. This phase lasts
 	   for a maximum time of 25.5 s, but will loop until successful. */
 	Serial.println("Waiting for event association.");
@@ -60,14 +67,12 @@ void setup()
 
 		if (bsearch_id(id, eventIDs, lenEventIDs) < 0)
 		{
-			led_rgb_off();
-			delay(100);
-			led_rgb_red();
-			delay(100);
+			led_rgb_blink_red(200);
 		}
 		else
 		{
-			led_rgb_white();
+			eventID = id;
+			led_rgb_blink_to_white(1000);
 			break;
 		}
 	}
@@ -89,17 +94,25 @@ void loop()
 	}
 	else  led_esp_on();
 
-	/* Make sure the LED colors reflect the current mode. */
-	if (provisioning)  led_rgb_purple();
-	else               led_rgb_white();
-
 	/* Try to provision a card. This will immediately call to the web. */
-	if (provisioning)
+	if (provisioning && read_uid(100, buffer, &len))
 	{
-		/* TODO */
+		/* Check if it's a valid provision card. Toggle modes if so. */
+		if (bsearch_id(id, provisionerIDs, lenProvisionerIDs) >= 0)
+		{
+			Serial.println("Switching to attendance mode.");
+			provisioning = false;
+			led_rgb_blink_to_white(1000);
+			delay(1000);
+		}
+		/* TODO: Check if the card is not a pre-existing event or user. */
+		/* TODO: Provision the card. */
+		else
+		{
+		}
 	}
 	/* Try to read a card. This phase lasts for a maximum time of 10 s. */
-	else if (read_uid(100, buffer, &len))
+	else if (!provisioning && read_uid(100, buffer, &len))
 	{
 		id = (buffer[0] << 0x18) | (buffer[1] << 0x10) | (buffer[2] << 0x08) | buffer[3];
 
@@ -107,24 +120,24 @@ void loop()
 		Serial.println(id);
 
 		/* Check if it's a valid user card. */
-		if (bsearch_id(id, userIDs, lenUserIDs) < 0)
+		if (bsearch_id(id, userIDs, lenUserIDs) >= 0)
 		{
-			led_rgb_green();
-			delay(1000);
 
 			/* TODO: cache valid read cards, then send to API at intervals. */
 		}
 		/* TODO: check if it's a valid event card. */
-		/* TODO: check if it's a valid provision card. */
+		/* Check if it's a valid provision card. Toggle modes if so. */
+		else if (bsearch_id(id, provisionerIDs, lenProvisionerIDs) >= 0)
+		{
+			Serial.println("Switching to provision mode.");
+			provisioning = true;
+			led_rgb_blink_to_purple(1000);
+			delay(1000);
+		}
+		/* Invalid card. */
 		else
 		{
+			/* TODO: check with the web API before calling it invalid. */
 		}
-
-		/* At this time, it is assumed that all cards are user cards. Provision
-		   cards and event cards are yet to be implemented. */
-		post(API, "/api/hp/attendance/create", HP_KEY, &code, &response,
-			"{\"user\":"+String(id)+",\"event\":"+String(eventID)+"}");
-		Serial.println(code);
-		Serial.println(response);
 	}
 }
