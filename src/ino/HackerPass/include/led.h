@@ -68,18 +68,103 @@ void led_rgb_off()
 	analogWrite(LED_RGB_B, 0);
 }
 
+/* This is meant to be used once. Interval must be >100 (ms). */
+void led_rgb_blink_to_red(uint32_t interval)
+{
+	led_rgb_off();
+	delay(100);
+	led_rgb_red();
+	delay(interval-100);
+}
+
+/* This is meant to be used in a loop. */
+void led_rgb_blink_red(uint32_t interval)
+{
+	led_rgb_off();
+	delay(interval/2);
+	led_rgb_red();
+	delay(interval/2);
+}
+
+/* This is meant to be used once. Interval must be >100 (ms). */
+void led_rgb_blink_to_green(uint32_t interval)
+{
+	led_rgb_off();
+	delay(100);
+	led_rgb_green();
+	delay(interval-100);
+}
+
+/* This is meant to be used in a loop. */
+void led_rgb_blink_green(uint32_t interval)
+{
+	led_rgb_off();
+	delay(interval/2);
+	led_rgb_green();
+	delay(interval/2);
+}
+
+/* This is meant to be used once. Interval must be >100 (ms). */
+void led_rgb_blink_to_blue(uint32_t interval)
+{
+	led_rgb_off();
+	delay(100);
+	led_rgb_blue();
+	delay(interval-100);
+}
+
+/* This is meant to be used in a loop. */
+void led_rgb_blink_blue(uint32_t interval)
+{
+	led_rgb_off();
+	delay(interval/2);
+	led_rgb_blue();
+	delay(interval/2);
+}
+
+/* This is meant to be used once. Interval must be >100 (ms). */
+void led_rgb_blink_to_purple(uint32_t interval)
+{
+	led_rgb_off();
+	delay(100);
+	led_rgb_purple();
+	delay(interval-100);
+}
+
+/* This is meant to be used in a loop. */
+void led_rgb_blink_purple(uint32_t interval)
+{
+	led_rgb_off();
+	delay(interval/2);
+	led_rgb_purple();
+	delay(interval/2);
+}
+
+/* This is meant to be used once. Interval must be >100 (ms). */
+void led_rgb_blink_to_white(uint32_t interval)
+{
+	led_rgb_off();
+	delay(100);
+	led_rgb_white();
+	delay(interval-100);
+}
+
+/* This is meant to be used in a loop. */
+void led_rgb_blink_white(uint32_t interval)
+{
+	led_rgb_off();
+	delay(interval/2);
+	led_rgb_white();
+	delay(interval/2);
+}
+
 void led_rgb_test()
 {
-	led_rgb_red();
-	delay(500);
-	led_rgb_green();
-	delay(500);
-	led_rgb_blue();
-	delay(500);
-	led_rgb_purple();
-	delay(500);
-	led_rgb_white();
-	delay(500);
+	led_rgb_blink_to_red(1000);
+	led_rgb_blink_to_green(1000);
+	led_rgb_blink_to_blue(1000);
+	led_rgb_blink_to_purple(1000);
+	led_rgb_blink_to_white(1000);
 }
 
 #endif
