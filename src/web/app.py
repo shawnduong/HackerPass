@@ -15,7 +15,8 @@ app.secret_key = FLASK_SECRET_KEY
 # Load the database.
 db = SQLAlchemy(app)
 from models import *
-db.create_all()
+with app.app_context():
+	db.create_all()
 
 # Authentication.
 from authentication import *
