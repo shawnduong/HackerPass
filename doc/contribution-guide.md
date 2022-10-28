@@ -129,8 +129,6 @@ All of these conventions are to have uniform and predictable patterns, as well a
 
 This task list may be incomplete and will be updated. Completed tasks will be removed from this list.
 
-- `ino`: Blink the external RGB LED green if card, attendance valid.
-- `ino`: Blink the external RGB LED red if card, attendance invalid.
 - `web`: Create front-end where users can check their points.
 
 **Additional Features**
