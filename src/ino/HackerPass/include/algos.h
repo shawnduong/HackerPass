@@ -24,4 +24,12 @@ int32_t bsearch_id(uint32_t id, uint32_t *arr, uint16_t len)
 	return -1;
 }
 
+/* Linearly search some ID array (uint32_t types) for some ID. This should be
+   used instead of bsearch in cases where arr is not sorted. */
+int32_t lsearch_id(uint32_t id, uint32_t *arr, uint16_t len)
+{
+	for (uint16_t i = 0; i < len; i++)  if (arr[i] == id)  return i;
+	return -1;
+}
+
 #endif
