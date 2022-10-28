@@ -12,5 +12,8 @@
 #define MAX_EVENTS  20
 #define MAX_USERS  100
 
+/* Maximum number of provisioner cards issued. */
+#define MAX_PROVISIONERS 10
+
 /* Unique identification key for this particular unit. */
 #define HP_KEY    0x0000000000000000
