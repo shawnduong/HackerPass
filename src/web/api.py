@@ -17,7 +17,7 @@ def get_users():
 	try:
 		return {
 			"Status": "Success.",
-			"CardIDs": [u.cardID for u in User.query.all()]
+			"CardIDs": sorted([u.cardID for u in User.query.all()])
 		}, 200
 	except:
 		return {"Status": "Failure."}, 500
