@@ -15,5 +15,8 @@
 /* Maximum number of provisioner cards issued. */
 #define MAX_PROVISIONERS 10
 
+/* Cache size of user IDs to create attendances for all at once. */
+#define USER_ID_CACHE_SIZE  10
+
 /* Unique identification key for this particular unit. */
 #define HP_KEY    0x0000000000000000
