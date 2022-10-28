@@ -36,7 +36,7 @@ void setup()
 	led_esp_off();
 	led_init();
 	led_rgb_test();
-	led_rgb_blink_to_red();
+	led_rgb_blink_to_red(1000);
 
 	/* Initialize variables. */
 	eventID = 0;  // Edge case when actual card ID = 0 (p = 2e-10). p is
@@ -97,6 +97,11 @@ void loop()
 	/* Try to provision a card. This will immediately call to the web. */
 	if (provisioning && read_uid(100, buffer, &len))
 	{
+		id = (buffer[0] << 0x18) | (buffer[1] << 0x10) | (buffer[2] << 0x08) | buffer[3];
+
+		Serial.println("Card detected.");
+		Serial.println(id);
+
 		/* Check if it's a valid provision card. Toggle modes if so. */
 		if (bsearch_id(id, provisionerIDs, lenProvisionerIDs) >= 0)
 		{
@@ -105,10 +110,51 @@ void loop()
 			led_rgb_blink_to_white(1000);
 			delay(1000);
 		}
-		/* TODO: Check if the card is not a pre-existing event or user. */
-		/* TODO: Provision the card. */
+		/* Check if it's already a user card. */
+		else if (bsearch_id(id, userIDs, lenUserIDs) >= 0)
+		{
+			Serial.println("Refused to provision card: pre-existing user.");
+			led_rgb_blink_green(500);
+			led_rgb_blink_to_purple(500);
+		}
+		/* Check if it's already an event card. */
+		else if (bsearch_id(id, eventIDs, lenEventIDs) >= 0)
+		{
+			Serial.println("Refused to provision card: pre-existing event.");
+			led_rgb_blink_blue(500);
+			led_rgb_blink_to_purple(500);
+		}
+		/* Provision the card. */
 		else
 		{
+			post(API, "/api/hp/user/create", HP_KEY, &code, &response, "{\"cardID\":"+String(id)+"}");
+
+			if (code == 200)
+			{
+				Serial.println("Successfully provisioned card.");
+				led_rgb_blink_green(500);
+				led_rgb_blink_to_purple(500);
+
+				Serial.println("Updating cache.");
+				get_ids(API, "/api/hp/user", HP_KEY, &lenUserIDs, userIDs);
+			}
+			else
+			{
+				Serial.println("Could not successfully provision card. HTTP code and response:");
+				Serial.println(code);
+				Serial.println(response);
+				led_rgb_blink_red(500);
+				led_rgb_blink_to_purple(500);
+
+				DynamicJsonDocument json(1024);
+				deserializeJson(json, response);
+
+				if (json["Status"] == "User already exists.")
+				{
+					Serial.println("Updating cache.");
+					get_ids(API, "/api/hp/user", HP_KEY, &lenUserIDs, userIDs);
+				}
+			}
 		}
 	}
 	/* Try to read a card. This phase lasts for a maximum time of 10 s. */
