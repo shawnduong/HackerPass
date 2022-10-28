@@ -1,4 +1,3 @@
-#include <ArduinoJson.h>  // ArduinoJson library by Benoit Blanchon.
 #include "include/algos.h"
 #include "include/api.h"
 #include "include/led.h"
@@ -18,9 +17,6 @@ bool provisioning;
 /* Buffers. */
 byte buffer[12];
 byte len;
-
-/* 1 KB allocated for JSON data buffer. */
-DynamicJsonDocument json(1024);
 
 /* Cached eventIDs and userIDs retrieved from the web. These are expected to be
    sorted web-side to offload computational cost as these will be b-searched. */
@@ -49,27 +45,10 @@ void setup()
 	led_esp_on();
 
 	Serial.println("Getting event IDs from API.");
-	while (true)
-	{
-		delay(500);
-		get(API, "/api/hp/event/ids", HP_KEY, &code, &response);
+	get_ids(API, "/api/hp/event/ids", HP_KEY, &lenEventIDs, eventIDs);
 
-		if (code != 200)
-			continue;
-
-		if (deserializeJson(json, response))
-			continue;
-
-		if (json["Status"] != "Success.")
-			continue;
-
-		lenEventIDs = json["CardIDs"].size();
-
-		for (uint8_t i = 0; i < lenEventIDs; i++)
-			eventIDs[i] = json["CardIDs"][i].as<uint32_t>();
-
-		break;
-	}
+	Serial.println("Getting user IDs from API.");
+	get_ids(API, "/api/hp/user", HP_KEY, &lenUserIDs, userIDs);
 
 	/* Wait for an organizer to tap an event association card. This phase lasts
 	   for a maximum time of 25.5 s, but will loop until successful. */
@@ -126,6 +105,20 @@ void loop()
 
 		Serial.println("Card detected.");
 		Serial.println(id);
+
+		/* Check if it's a valid user card. */
+		if (bsearch_id(id, userIDs, lenUserIDs) < 0)
+		{
+			led_rgb_green();
+			delay(1000);
+
+			/* TODO: cache valid read cards, then send to API at intervals. */
+		}
+		/* TODO: check if it's a valid event card. */
+		/* TODO: check if it's a valid provision card. */
+		else
+		{
+		}
 
 		/* At this time, it is assumed that all cards are user cards. Provision
 		   cards and event cards are yet to be implemented. */
