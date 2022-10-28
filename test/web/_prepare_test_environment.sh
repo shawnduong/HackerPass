@@ -19,6 +19,9 @@
 #   - Activated by card ID 0x12341234
 # 1 pre-existing attendance
 # - 0xdeadbeef -> "Cult Offerings 101"
+# 2 provisioners
+# - 0x11112222
+# - 0xaaaabbbb
 
 ./create_user.sh 3735928559
 ./create_user.sh 3737844653
@@ -28,3 +31,6 @@
 ./create_event.sh 305402420 250 "How to Install Linux on a Dead Badger" "Learn how to make Linux run on anything." "COB2 120" "Anonymous" 1668290400 1668294000
 
 ./create_attendance.sh 3735928559 322376503
+
+./create_provisioner.sh 2863315899
+./create_provisioner.sh 286335522

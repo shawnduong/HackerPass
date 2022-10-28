@@ -211,3 +211,43 @@ def create_attendance():
 	except:
 		return {"Status": "Failure."}, 500
 
+@app.route("/api/hp/provisioner/ids", methods=["GET"])
+def get_provisioner_ids():
+	"""
+	Return a JSON list of all provisioner IDs.
+	"""
+
+	try:
+		assert int(request.args.get("key")) in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
+
+	provisioners = sorted([p.cardID for p in Provisioner.query.all()])
+
+	return {
+		"Status": "Success.",
+		"CardIDs": provisioners
+	}, 200
+
+@app.route("/api/hp/provisioner/create", methods=["POST"])
+def create_provisioner():
+	"""
+	Create a new provisioner with some card ID.
+	"""
+
+	try:
+		assert int(request.args.get("key")) in HP_KEYS
+	except:
+		return {"Status": "Authentication invalid."}, 403
+
+	try:
+		assert Provisioner.query.filter_by(cardID=request.json["cardID"]).first() is None
+		provisioner = Provisioner(request.json["cardID"])
+		db.session.add(provisioner)
+		db.session.commit()
+		return {"Status": "Provisioner created."}, 200
+	except AssertionError:
+		return {"Status": "Provisioner already exists."}, 400
+	except:
+		return {"Status": "Failure."}, 500
+

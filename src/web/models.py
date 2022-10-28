@@ -61,7 +61,7 @@ class User(UserMixin, db.Model):
 
 class Event(db.Model):
 	"""
-	A definition for a single event, consisting of a unique event ID (id),
+	A definition for a single event, consisting of a unique event ID (card ID),
 	points reward, a title, about, room, author(s), and epoch timestamp.
 	"""
 
@@ -109,4 +109,22 @@ class Attendance(db.Model):
 
 		self.user  = user
 		self.event = event
+
+class Provisioner(db.Model):
+	"""
+	A definition for a single provisioner, a card that toggles between provision
+	and attendance mode.
+	"""
+
+	__tablename__ = "provisioner"
+
+	id      = db.Column(db.Integer, primary_key=True)
+	cardID  = db.Column(db.Integer    , unique=True , nullable=False)
+
+	def __init__(self, cardID=0):
+		"""
+		Constructor method for Provisioner type objects.
+		"""
+
+		self.cardID = cardID
 
