@@ -5,9 +5,9 @@
    if found, or -1 if not found. */
 int32_t bsearch_id(uint32_t id, uint32_t *arr, uint16_t len)
 {
-	uint16_t l = 0;
-	uint16_t r = len-1;
-	uint16_t m = 0;
+	int32_t l = 0;
+	int32_t r = len-1;
+	int32_t m = 0;
 
 	while (l <= r)
 	{
