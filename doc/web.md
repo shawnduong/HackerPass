@@ -323,6 +323,80 @@ Example response:
 
 Related file(s): [`ajax.py`](https://github.com/shawnduong/HackerPass/blob/main/src/web/api.py)
 
+AJAX API calls are enacted by users through their web client. They require the user to be logged in.
+
+POST `/ajax/user/update/name` \
+`app_user_update_name()`
+
+Update a user's name.
+
+Fields: `{"name": <String name>}`
+
+Example response:
+```js
+{
+  "Status": "Name updated."
+}
+```
+
+POST `/ajax/user/update/email` \
+`app_user_update_email()`
+
+Update a user's email.
+
+Fields: `{"email": <String email>}`
+
+Example response:
+```js
+{
+  "Status": "Email updated."
+}
+```
+
+GET `/ajax/user/info` \
+`app_user_info()`
+
+Return a JSON object of a user's points and the events they've attended as well as upcoming events.
+
+Example response:
+```js
+{
+  "Attendances": [
+    {
+      "event": 1, 
+      "id": 1, 
+      "user": 1
+    }
+  ], 
+  "Events": [
+    {
+      "about": "Learn how to make sacrifices to old gods.", 
+      "author": "Lucy", 
+      "end": 1668294000, 
+      "eventID": 322376503, 
+      "id": 1, 
+      "points": 500, 
+      "room": "COB2 110", 
+      "start": 1668286800, 
+      "title": "Cult Offerings 101"
+    }, 
+    {
+      "about": "Learn how to make Linux run on anything.", 
+      "author": "Anonymous", 
+      "end": 1668294000, 
+      "eventID": 305402420, 
+      "id": 2, 
+      "points": 250, 
+      "room": "COB2 120", 
+      "start": 1668290400, 
+      "title": "How to Install Linux on a Dead Badger"
+    }
+  ], 
+  "Points": 500, 
+  "Status": "Success."
+}
+```
+
 ## Footnotes
 
 1. Security is not a primary consideration of HackerPass 1.0 as 1.0 is merely a proof-of-concept. However, it will become more important for 2.0.
