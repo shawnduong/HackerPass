@@ -8,33 +8,49 @@
 	<script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}" defer></script>
 	<script src="{{ url_for('static', filename='js/ajax.js') }}" defer></script>
 
-	<a href="/logout">Log Out</a>
+	<div class="module">
+		
+		<div class="header">
+			<p>HACKERPASS</p>
+		</div>
 
-	{% if current_user.name != None %}
-		<h1 id="user-name">{{ current_user.name }}</h1>
-	{% else %}
-		<h1 id="user-name">HackerPass</h1>
-	{% endif %}
+		<div class="main-body">
 
-	{% if current_user.email != None %}
-		<h1 id="user-email">{{ current_user.email }}</h1>
-	{% else %}
-		<h1 id="user-email">Email not set.</h1>
-	{% endif %}
+			<!-- Number of points the user currently has -->
+			<div id="user-points">{{ current_user.points }}</div>
 
-	<h2>Account Info</h2>
+			<h3 class="field-label">HACKER NAME</h3>
+			{% if current_user.name != None %}
+				<p class="field-contents" id="user-name">{{ current_user.name }}</p>
+			{% else %}
+				<p class="field-contents" id="user-name">Name not set.</p>
+			{% endif %}
 
-	<p>Points: <span id="user-points">{{ current_user.points }}</span></p>
+			<h3 class="field-label">E-MAIL</h3>
+			{% if current_user.email != None %}
+				<p class="field-contents" id="user-email">{{ current_user.email }}</p>
+			{% else %}
+				<p class="field-contents" id="user-email">Email not set.</p>
+			{% endif %}
 
-	<h2>Update Info</h2>
+			<p id="footer"><a id="logout" href="/logout">log("out")</a></p>
 
-	<form id="user-update-name">
-		<input type="text" id="user-update-name-field" name="name" placeholder="Name">
-		<input type="submit" value="✓">
-	</form>
+			<!-- TEMPORARY: Hiding update forms
 
-	<form id="user-update-email">
-		<input type="email" id="user-update-email-field" name="email" placeholder="Email">
-		<input type="submit" value="✓">
-	</form>
+			<form id="user-update-name">
+				<input type="text" id="user-update-name-field" name="name" placeholder="Name">
+				<input type="submit" value="✓">
+			</form>
+
+			<form id="user-update-email">
+				<input type="email" id="user-update-email-field" name="email" placeholder="Email">
+				<input type="submit" value="✓">
+			</form>
+
+			-->
+
+		</div>
+
+	</div>
+
 </body>
