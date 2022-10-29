@@ -148,6 +148,14 @@ Size of the send cache.
 A unique 64-bit value that should also be set in `/src/web/keys.py`. This should remain a secret.⁶
 
 ## [`upload.sh`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/upload.sh)
+
+This is simply a convenient upload script that flashes the firmware to a NodeMCU. It is assumed as settings are already defined in the Arduino IDE.⁷ Alternatively, uploading may be done directly through the Arduino IDE.
+
+Usage:
+```sh
+$ ./upload.sh <DEVICE>
+```
+
 ## [`include/algos.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/algos.h)
 ## [`include/api.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/api.h)
 ## [`include/led.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/led.h)
@@ -156,6 +164,8 @@ A unique 64-bit value that should also be set in `/src/web/keys.py`. This should
 
 ## Footnotes
 
+The bulk of these footnotes are future directions.
+
 1. Removal of unused `len` variable is possible as HackerPass units are guaranteed to always be 4-byte UIDs.
 2. `ti` stores the time of either setup completion or the last send cache flush time, whichever is later. It is used so that the send cache can flush to the API a minimum of 10 seconds since the last flush. In the future, this can be used to sleep the Wi-Fi antenna and only wake when flushing, possibly reducing power consumption.
 3. It is recognized that updating the user cache upon a card-to-be-provisioned being not found in the cache, but being already found on the API may be a bug. This may not be the case in multi-provisioner setups, but in single-provisioner testing, this may be a race condition or related bug.
@@ -163,3 +173,4 @@ A unique 64-bit value that should also be set in `/src/web/keys.py`. This should
 4. Flushing the user ID cache to the API to create a series of attendances is currently inefficient as it enacts a series of POST requests. Overhead may be minimized if it enacts one aggregate POST request. The API will also need to be modified to accommodate for this.
 5. This should also flush the cache, and that should be implemented in the future.
 6. HTTPS and domain names should be tested soon for a more secure HackerPass.
+7. The upload script should define all of the parameters so that the Arduino IDE is not needed for uploading.
