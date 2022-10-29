@@ -148,8 +148,6 @@ def update_event():
 	except:
 		return {"Status": "Authentication invalid."}, 403
 
-	request.json.pop("key")
-
 	try:
 		assert (e:=Event.query.filter_by(id=request.json["id"])).first() is not None
 		e.update(request.json)
