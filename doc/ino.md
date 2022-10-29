@@ -82,6 +82,37 @@ Caches are used for events, users, provisioners, and users who have tapped their
 
 There exists a cache of user IDs that have scanned their card. This will be flushed to the API as a series of attendance registrations between the HackerPass unit's associated event ID and every card scanned in the cache, then cleared.⁴ This flushing and clearing may also be done upon the cache reaching its maximum capacity.
 
+*Setup*
+
+`void setup()`
+
+Tasks:
+- Initialize RFID and LED.
+  - Run LED test.
+- Connect to a network.
+- Populate the caches.
+- Hold until an event association.
+
+*Loop*
+
+`void loop()`
+
+Loop:
+- If disconnected from the network, attempt to reconnect.
+- If provisioning, attempt to read a card.
+  - If the card is a provisioner card, switch back to attendance mode.
+  - If the card is a pre-existing user or event card, do not provision it.
+  - If the card is new, provision it and update the cache.
+    - Provisioning implies that the card is now ready to be handed to a user.
+- If taking attendance, attempt to read a card.
+  - If it is a valid user card, add it to the cache if it is not already cached.
+    - If the cache is full, flush the cache and then add it if it is not already cached.
+  - If it is a valid event card, flush the cache and change the event association.
+  - If it is a valid provisioner card, switch to provision mode.⁵
+  - If it is not in any cache, blink red and update the cache.
+- Flush the send cache to the web as a series of attendances between scanned cards and the associated event.⁴
+  - There is a minimum wait time of 10 seconds between each non-prompted flush.²
+
 ## [`config.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/config.h)
 ## [`upload.sh`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/upload.sh)
 ## [`include/algos.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/algos.h)
@@ -97,3 +128,4 @@ There exists a cache of user IDs that have scanned their card. This will be flus
 3. It is recognized that updating the user cache upon a card-to-be-provisioned being not found in the cache, but being already found on the API may be a bug. This may not be the case in multi-provisioner setups, but in single-provisioner testing, this may be a race condition or related bug.
    - Replication: enter provision mode and provision a new card. Observe that the card will be provisioned and the cache updated. Tap the card again, and observe that the card was not found in the cache but was found on the API.
 4. Flushing the user ID cache to the API to create a series of attendances is currently inefficient as it enacts a series of POST requests. Overhead may be minimized if it enacts one aggregate POST request. The API will also need to be modified to accommodate for this.
+5. This should also flush the cache, and that should be implemented in the future.
