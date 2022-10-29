@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Usage: ./get_users.sh
 
 curl http://127.0.0.1:8080/api/hp/user?key=0

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Usage: ./delete_event.sh <ID>
 
 curl http://127.0.0.1:8080/api/hp/event/delete?key=0 \

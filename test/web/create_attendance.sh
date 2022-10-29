@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Usage: ./create_attendance.sh <CARDID> <EVENTID>
 
 curl http://127.0.0.1:8080/api/hp/attendance/create?key=0 \

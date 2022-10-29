@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Usage: ./create_event.sh <EVENTID> <POINTS> <TITLE> <ABOUT> <ROOM> <AUTHOR> <START> <END>
 
 curl http://127.0.0.1:8080/api/hp/event/create?key=0 \

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Prepare a test environment with:
 # 3 users
 # - 0xdeadbeef
