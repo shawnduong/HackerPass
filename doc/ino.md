@@ -285,6 +285,19 @@ Get the MAC address of the ESP8266.
 
 ## [`include/rc522.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/rc522.h)
 
+**Includes**
+- [`<MFRC522.h>` by GithubCommunity](https://github.com/miguelbalboa/rfid)
+
+**Functions**
+
+`void rc522_init()`
+
+Begin SPI and PCD.
+
+`bool read_uid(byte attempts, byte *buffer, byte *len)`
+
+Try to read a UID from a card for a specified number of attempts. Write the UID and length to the buffer, and then return true. If after the specified number of attempts, no card was successfully read, return false.
+
 ## Footnotes
 
 The bulk of these footnotes are future directions.
