@@ -1,4 +1,4 @@
-# Functions: ino
+# Documentation: ino
 
 **ino** contains all the firmware and definitions for HackerPass units.
 
