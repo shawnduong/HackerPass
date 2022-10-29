@@ -113,6 +113,212 @@ Related file(s): [`models.py`](https://github.com/shawnduong/HackerPass/blob/mai
 
 Related file(s): [`api.py`](https://github.com/shawnduong/HackerPass/blob/main/src/web/api.py)
 
+HackerPass (HP) API calls are enacted by HackerPass units. HackerPass units must specify their `HP_KEY` as the `key` request argument (`?key=<HP_KEY>`) in the API call, or else authentication will fail and the call will be rejected.
+
+GET `/api/hp/user` \
+`get_users()`
+
+Return a list of all user card IDs.
+
+Example response:
+```js
+{
+  "CardIDs": [
+    3735928559,
+    3737844653,
+    4276994270
+  ],
+  "Status": "Success."
+}
+```
+
+GET `/api/hp/user/<cardID>` \
+`get_user(cardID)`
+
+Return everything about a specific user.
+
+Example response:
+```js
+{
+  "3735928559": {
+    "cardID": 3735928559,
+    "email": null,
+    "id": 1,
+    "name": null,
+    "points": 500
+  },
+  "Status": "Success."
+}
+```
+
+POST `/api/hp/user/create` \
+`create_user()`
+
+Create a new user with some card ID. Name and email fields are filled out by the user later on after registration.
+
+Fields: `{"cardID": <int cardID>}`
+
+Example response:
+```js
+{
+  "Status": "User created."
+}
+```
+
+GET `/api/hp/event` \
+`get_events()`
+
+Return a JSON list of all events.
+
+Example response:
+```js
+{
+  "Events": [
+    {
+      "about": "Learn how to make sacrifices to old gods.",
+      "author": "Lucy",
+      "end": 1668294000,
+      "eventID": 322376503,
+      "id": 1,
+      "points": 500,
+      "room": "COB2 110",
+      "start": 1668286800,
+      "title": "Cult Offerings 101"
+    },
+    {
+      "about": "Learn how to make Linux run on anything.",
+      "author": "Anonymous",
+      "end": 1668294000,
+      "eventID": 305402420,
+      "id": 2,
+      "points": 250,
+      "room": "COB2 120",
+      "start": 1668290400,
+      "title": "How to Install Linux on a Dead Badger"
+    }
+  ],
+  "Status": "Success."
+}
+```
+
+GET `/api/hp/event/ids` \
+`get_event_ids()`
+
+Return a JSON list of all event IDs.
+
+Example response:
+```js
+{
+  "CardIDs": [
+    305402420,
+    322376503
+  ],
+  "Status": "Success."
+}
+```
+
+POST `/api/hp/event/create` \
+`create_event()`
+
+Create a new event with some number of associated points.
+
+Fields:
+```js
+{
+	"eventID": <int cardID>,
+	"points": <int points>,
+	"title": <String title>,
+	"about": <String about>,
+	"room": <String room>,
+	"author": <String author>,
+	"start": <int epochStart>,
+	"end": <int epochEnd>
+}
+```
+
+Example response:
+```js
+{
+  "Status": "Event created."
+}
+```
+
+POST `/api/hp/event/update` \
+`update_event()`
+
+Update an event.
+
+Fields: `{"id": <int ID>, <item>: <value>, ...}`
+
+Note that ID is the database row ID, not the card ID.
+
+Example response:
+```js
+{
+  "Status": "Event updated."
+}
+```
+
+POST `/api/hp/event/delete` \
+`delete_event()`
+
+Delete an event based on its ID.
+
+Fields: `{"id": <int ID>}`
+
+Note that ID is the database row ID, not the card ID.
+
+Example response:
+```js
+{
+  "Status": "Event deleted."
+}
+```
+
+POST `/api/hp/attendance/create` \
+`create_attendance()`
+
+Create an attendance for a user.
+
+Fields: `{"user": <int cardID>, "event": <int cardID>}`
+
+Example response:
+```js
+{
+  "Status": "Attendance created."
+}
+```
+
+GET `/api/hp/provisioner/ids` \
+`get_provisioner_ids()`
+
+Return a JSON list of all provisioner IDs.
+
+Example response:
+```js
+{
+  "CardIDs": [
+    286335522,
+    2863315899
+  ],
+  "Status": "Success."
+}
+```
+
+POST `/api/hp/provisioner/create` \
+`create_provisioner()`
+
+Create a new provisioner with some card ID.
+
+Fields: `{"cardID": <int cardID>}`
+
+Example response:
+```js
+{
+  "Status": "Provisioner created."
+}
+```
+
 ## AJAX API
 
 Related file(s): [`ajax.py`](https://github.com/shawnduong/HackerPass/blob/main/src/web/api.py)
