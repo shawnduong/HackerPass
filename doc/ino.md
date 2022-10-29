@@ -82,6 +82,8 @@ Caches are used for events, users, provisioners, and users who have tapped their
 
 There exists a cache of user IDs that have scanned their card. This will be flushed to the API as a series of attendance registrations between the HackerPass unit's associated event ID and every card scanned in the cache, then cleared.⁴ This flushing and clearing may also be done upon the cache reaching its maximum capacity.
 
+**Functions**
+
 *Setup*
 
 `void setup()`
@@ -117,6 +119,8 @@ Loop:
 
 This contains unit-specific configurations.
 
+**Definitions**
+
 `SSID` \
 `PASSWORD`
 
@@ -151,7 +155,8 @@ A unique 64-bit value that should also be set in `/src/web/keys.py`. This should
 
 This is simply a convenient upload script that flashes the firmware to a NodeMCU. It is assumed as settings are already defined in the Arduino IDE.⁷ Alternatively, uploading may be done directly through the Arduino IDE.
 
-Usage:
+**Usage**
+
 ```sh
 $ ./upload.sh <DEVICE>
 ```
@@ -159,6 +164,8 @@ $ ./upload.sh <DEVICE>
 ## [`include/algos.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/algos.h)
 
 Auxiliary algorithm definitions.
+
+**Functions**
 
 `int32_t bsearch_id(uint32_t id, uint32_t *arr, uint16_t len)`
 
@@ -171,9 +178,26 @@ Linearly search some ID array (uint32\_t types) for some ID. This should be used
 Likewise, return the index if found, or -1 if not found.
 
 ## [`include/api.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/api.h)
-## [`include/led.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/led.h)
-## [`include/networking.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/networking.h)
-## [`include/rc522.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/rc522.h)
+
+Auxiliary API definitions.
+
+**Includes**
+- [`<ArduinoJson.h>` by Benoit Blanchon](https://github.com/bblanchon/ArduinoJson)
+- `<ESP8266HTTPClient.h>` (default library from the ESP Arduino core)
+
+**Functions**
+
+`void get(String host, String path, uint64_t key, uint16_t *code, String *response)`
+
+GET some host+path with a key and write the output to code, response.
+
+`void post(String host, String path, uint64_t key, uint16_t *code, String *response, String data)`
+
+POST JSON data to a host+path with a key and write the output to a code, response.
+
+`get_ids(String host, String path, uint64_t key, uint16_t *len, uint32_t *data)`
+
+Get some list of IDs. Write the length to len and the data to data.
 
 ## Footnotes
 
