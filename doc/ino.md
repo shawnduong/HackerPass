@@ -157,6 +157,19 @@ $ ./upload.sh <DEVICE>
 ```
 
 ## [`include/algos.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/algos.h)
+
+Auxiliary algorithm definitions.
+
+`int32_t bsearch_id(uint32_t id, uint32_t *arr, uint16_t len)`
+
+Binary search some ID array (uint32\_t types) for some ID. Return the index if found, or -1 if not found.
+
+`int32_t lsearch_id(uint32_t id, uint32_t *arr, uint16_t len)`
+
+Linearly search some ID array (uint32\_t types) for some ID. This should be used instead of bsearch in cases where arr is not sorted.
+
+Likewise, return the index if found, or -1 if not found.
+
 ## [`include/api.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/api.h)
 ## [`include/led.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/led.h)
 ## [`include/networking.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/networking.h)
