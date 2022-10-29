@@ -6,8 +6,6 @@
 #define LED_RGB_G 0
 #define LED_RGB_B 15
 
-#define BLINK_INTERVAL 500
-
 void led_init()
 {
 	pinMode(LED_ESP, OUTPUT);
