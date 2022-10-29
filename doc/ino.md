@@ -256,6 +256,33 @@ Evenly turn the LED off and on to some color, returning to the caller after inte
 Run a diagnostic test to make sure the LEDs are working.
 
 ## [`include/networking.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/networking.h)
+
+Networking-related definitions and functions.
+
+**Definitions**
+
+`POLL_INTERVAL`
+
+The interval to pause for before checking if a Wi-Fi connection is up yet.
+
+**Includes**
+- `<ESP8266WiFi.h>` (default library from the ESP Arduino core)
+- [`include/led.h`](#includeledh)
+
+**Functions**
+
+`bool connect(char *ssid, char *password, uint16_t timeout)`
+
+Connect to a Wi-Fi network using its SSID and password. If after timeout ms, Wi-Fi connection is unsuccessful, return false.
+
+`bool is_connected()`
+
+Return true if connected to a Wi-Fi network.
+
+`String get_mac()`
+
+Get the MAC address of the ESP8266.
+
 ## [`include/rc522.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/rc522.h)
 
 ## Footnotes
