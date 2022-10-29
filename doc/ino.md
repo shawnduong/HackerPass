@@ -114,6 +114,39 @@ Loop:
   - There is a minimum wait time of 10 seconds between each non-prompted flush.²
 
 ## [`config.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/config.h)
+
+This contains unit-specific configurations.
+
+`SSID` \
+`PASSWORD`
+
+The network SSID (name) and password. If there is not password, set it to be an empty string.
+
+`TIMEOUT`
+
+How long in milliseconds to wait for a network connection before giving up. This is used at the start of the main loop upon detecting a network disconnect. If no connection is found, continue *unless* a connection is explicitly required (as is the case in an urgent cache max flush).
+
+`API`
+
+The API endpoint. Remember to include `http://`. This has not been tested yet with HTTPS or domain names, and has so far been tested with a direct IP address.⁶ Do not include a trailing slash.
+
+`MAX_EVENTS` \
+`MAX_USERS`
+
+Adjustable numbers based on event logistics.
+
+`MAX_PROVISIONERS`
+
+The maximum number of provisioner cards across all organizers.
+
+`USER_ID_CACHE_SIZE`
+
+Size of the send cache.
+
+`HP_KEY`
+
+A unique 64-bit value that should also be set in `/src/web/keys.py`. This should remain a secret.⁶
+
 ## [`upload.sh`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/upload.sh)
 ## [`include/algos.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/algos.h)
 ## [`include/api.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/api.h)
@@ -129,3 +162,4 @@ Loop:
    - Replication: enter provision mode and provision a new card. Observe that the card will be provisioned and the cache updated. Tap the card again, and observe that the card was not found in the cache but was found on the API.
 4. Flushing the user ID cache to the API to create a series of attendances is currently inefficient as it enacts a series of POST requests. Overhead may be minimized if it enacts one aggregate POST request. The API will also need to be modified to accommodate for this.
 5. This should also flush the cache, and that should be implemented in the future.
+6. HTTPS and domain names should be tested soon for a more secure HackerPass.
