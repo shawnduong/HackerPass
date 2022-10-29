@@ -31,7 +31,7 @@ This is the primary entry point for **ino**.
 
 *HTTP Response Buffers*
 
-`uint16_t code`
+`uint16_t code` \
 `String response`
 
 Buffers for a request's HTTP status code and response data. These are used when the HackerPass unit GETs or POSTs something to the API in order to determine success and if applicable, retrieve data for further processing.
@@ -52,7 +52,7 @@ Buffer for any read card ID, whether it be an event, user, or provisioner card.
 
 *Misc. Buffers*
 
-`byte buffer[12]`
+`byte buffer[12]` \
 `byte len`
 
 12-byte buffer used to read the bytes of a card ID into, and the length of the read card ID. MIFARE Classics can have card ID lengths of 4 or 7 bytes, with some documentation from the [MFRC522 library](https://github.com/miguelbalboa/rfid) suggesting up to 10-byte UIDs. HackerPass currently uses 4-byte UIDs, and `len` is therefore not used.
@@ -69,13 +69,13 @@ Buffer for any read card ID, whether it be an event, user, or provisioner card.
 
 *Card ID Caches*
 
-`uint32_t eventIDs[MAX_EVENTS]`
-`uint16_t lenEventIDs`
-`uint32_t userIDs[MAX_USERS]`
-`uint16_t lenUserIDs`
-`uint32_t provisionerIDs[MAX_PROVISIONERS]`
-`uint16_t lenProvisionerIDs`
-`uint32_t cacheUserIDs[USER_ID_CACHE_SIZE]`
+`uint32_t eventIDs[MAX_EVENTS]` \
+`uint16_t lenEventIDs` \
+`uint32_t userIDs[MAX_USERS]` \
+`uint16_t lenUserIDs` \
+`uint32_t provisionerIDs[MAX_PROVISIONERS]` \
+`uint16_t lenProvisionerIDs` \
+`uint32_t cacheUserIDs[USER_ID_CACHE_SIZE]` \
 `uint16_t lenCacheUserIDs`
 
 Caches are used for events, users, provisioners, and users who have tapped their cards. This reduces the amount of Wi-Fi transmissions and receptions necessary between the unit and the API. Each of these card 4-byte card IDs. The events, users, and provisioners caches are defined when first setting up and will be updated when an invalid card is scanned. The users cache will additionally be updated while in provision mode after a new card is provisioned, or when it is found that a user already exists but is not in the cache.³
