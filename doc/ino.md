@@ -199,6 +199,65 @@ POST JSON data to a host+path with a key and write the output to a code, respons
 
 Get some list of IDs. Write the length to len and the data to data.
 
+## [`include/led.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/led.h)
+
+All functions and definitions related to LEDs.
+
+**Definitions**
+
+`LED_ESP` \
+`LED_RGB_R` \
+`LED_RGB_G` \
+`LED_RGB_B`
+
+Output pin numbers for the ESP built-in LED and external RGB LED.
+
+**Functions**
+
+`void led_init()`
+
+Set all LED pins to be outputs.
+
+`void led_esp_on()`
+
+Turn the ESP LED on.
+
+`void led_esp_off()`
+
+Turn the ESP LED off.
+
+`void led_rgb_red()` \
+`void led_rgb_green()` \
+`void led_rgb_blue()` \
+`void led_rgb_purple()` \
+`void led_rgb_white()` \
+`void led_rgb_off()`
+
+Turn the external RGB LED to some color, or off.
+
+`void led_rgb_blink_to_red(uint32_t interval)` \
+`void led_rgb_blink_to_green(uint32_t interval)` \
+`void led_rgb_blink_to_blue(uint32_t interval)` \
+`void led_rgb_blink_to_purple(uint32_t interval)` \
+`void led_rgb_blink_to_white(uint32_t interval)`
+
+Turn the LED off shortly for 100 ms and then turn it on to some color, returning to the caller after interval-100 ms.
+
+`void led_rgb_blink_red(uint32_t interval)` \
+`void led_rgb_blink_green(uint32_t interval)` \
+`void led_rgb_blink_blue(uint32_t interval)` \
+`void led_rgb_blink_purple(uint32_t interval)` \
+`void led_rgb_blink_white(uint32_t interval)`
+
+Evenly turn the LED off and on to some color, returning to the caller after interval.
+
+`void led_rgb_test()`
+
+Run a diagnostic test to make sure the LEDs are working.
+
+## [`include/networking.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/networking.h)
+## [`include/rc522.h`](https://github.com/shawnduong/HackerPass/blob/doc/src/ino/HackerPass/include/rc522.h)
+
 ## Footnotes
 
 The bulk of these footnotes are future directions.
