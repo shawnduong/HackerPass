@@ -67,8 +67,25 @@ p.field-contents {
 	/* Font */
 	font-weight: 700;
 	font-style: italic;
-	color: #9665BA;
+	color: white;
+	border: solid 0.2rem white;
+	padding: 0.5rem;
+	border-radius: 0.8rem;
+	transition-duration: 0.4s;
+	text-decoration: none;
 }
+#logout:hover{
+	transition-duration: 0.4s;
+	background: linear-gradient(91.54deg, #FFC582 -8.62%, #E9677E 61.45%, #A263C0 104.75%);
+	cursor: pointer;
+	box-shadow: 0rem 0rem 0.8rem white;
+	padding: 0.6rem;
+	width:auto;
+	font-size: 1.1rem;
+	border-radius: 0.5rem;
+}
+
+
 
 #user-points {
 	/* Positioning */
