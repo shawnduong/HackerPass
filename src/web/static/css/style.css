@@ -13,7 +13,7 @@ html {
 .module {
 	/* Background */
 	margin: auto;
-	padding-bottom: 20px;
+	padding-bottom: 2rem;
 	width: 80%;
 	background: linear-gradient(152.52deg, #423245 7.97%, #5C4175 105.87%);
 	filter: drop-shadow(10px 10px 50px rgba(0, 0, 0, 0.5));
@@ -24,29 +24,29 @@ html {
 .header {
 	/* Positioning */
 	position: relative;
-	padding: 10px 0px 10px 0px;
+	padding: 1rem 0 1rem 0;
 	text-align: center;
 
 	/* Font */
 	font-weight: 700;
-	font-size: 16px;
-	text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+	font-size: 1rem;
+	text-shadow: 0px 0px 1rem rgba(255, 255, 255, 0.8);
 
 	/* Background*/
 	background: linear-gradient(91.54deg, #FFC582 -8.62%, #E9677E 61.45%, #A263C0 104.75%);
 	border-radius: 50px 50px 0px 0px;
 }
 
-.main-body {
+/* .main-body {
 	/* Positioning */
-	position: relative;
+	/* position: relative;
 	margin: 20px 10% 20px 10%;
-}
+} */ */
 
 h3.field-label {
 	/* Font */
 	font-weight: 700;
-	font-size: 15px;
+	font-size: 1rem;
 	text-shadow: 0px 0px 10px #FFFFFF;
 }
 
@@ -55,6 +55,24 @@ p.field-contents {
 	font-weight: 700;
 	font-size: 18px;
 	line-height: 8px;
+}
+.button{
+	font-weight: 1em;
+	padding: 1em 2em;
+	text-align: center;
+	font-size: 12pt;
+	margin-top: 2vh;
+	border-radius: 0.5em;
+}
+
+button:hover {
+	cursor: pointer;
+}
+body{
+	background: rgb(0, 0, 0);
+	padding: 2em;
+	margin: 30vh;
+	border-radius: 0.5em;
 }
 
 #footer {
@@ -88,6 +106,24 @@ p.field-contents {
 	html {
 		/* Temporary: for visualing the current view */
 		background-color: blue;
+		height:100vh;
+	}
+	header{
+		font-size: 2rem;
+	}
+	body{
+		margin-left: 2rem;
+		margin-right: 2rem;
+		font-size: 3rem;
+		text-align: center;
+		margin-top: 3rem;
+		padding: 5%;
+	}
+	button{
+		font-size: 3rem;
+	}
+	input{
+		font-size:1em;
 	}
 
 }
@@ -98,6 +134,23 @@ p.field-contents {
 	html {
 		/* Temporary: for visualing the current view */
 		background-color: red;
+		height:100vh;
+	}
+	header{
+		font-size: 2rem;
+	}
+	body{
+		margin-top: 50%;
+		margin-left: 2rem;
+		margin-right: 2rem;
+		font-size: 3rem;
+		text-align: center;
+	}
+	button{
+		font-size: 2rem;
+	}
+	input{
+		font-size:1em;
 	}
 
 }
