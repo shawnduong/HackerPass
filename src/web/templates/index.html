@@ -3,21 +3,21 @@
 		<link rel="stylesheet" href="../static/css/style.css">
 		{% include "head.html" %}
 	</head>
-
-	<header> 
-		<h1>HackerPass</h1> 
-	</header>
-	<body>
-		<form id="login-form" action="/login" method="POST">
-			<label for="cardID">Card ID:</label>
-			<br>
-			<input type="text" id="cardID" name="cardID">
-			<br>
-			<button id="login-submit">Log In</button>
-			{% if failed %}
-				<h5>Invalid card ID. Try again.</h5>
-			{% endif %}
-		</form>
-	</body>
-	<footer></footer>
+	<div class="module">
+		<header class="header"> 
+			<h1>HackerPass</h1> 
+		</header>
+		<body class="main-body">
+			<form id="login-form" action="/login" method="POST">
+				<label class="field-label" for="cardID">Card ID:</label>
+				<br>
+				<input type="text" id="cardID" name="cardID">
+				<br>
+				<button id="login-submit">Log In</button>
+				{% if failed %}
+					<h5>Invalid card ID. Try again.</h5>
+				{% endif %}
+			</form>
+		</body>
+	</div>
 </html>

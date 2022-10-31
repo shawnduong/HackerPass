@@ -10,7 +10,7 @@ html {
 	font-family: 'Space Mono', monospace;
 }
 
-.module {
+.module{
 	/* Background */
 	margin: auto;
 	padding-bottom: 2rem;
@@ -29,7 +29,7 @@ html {
 
 	/* Font */
 	font-weight: 700;
-	font-size: 1rem;
+	font-size: 2em;
 	text-shadow: 0px 0px 1rem rgba(255, 255, 255, 0.8);
 
 	/* Background*/
@@ -41,7 +41,7 @@ html {
 	/* Positioning */
 	/* position: relative;
 	margin: 20px 10% 20px 10%;
-} */ */
+} */
 
 h3.field-label {
 	/* Font */
@@ -68,12 +68,6 @@ p.field-contents {
 button:hover {
 	cursor: pointer;
 }
-body{
-	background: rgb(0, 0, 0);
-	padding: 2em;
-	margin: 30vh;
-	border-radius: 0.5em;
-}
 
 #footer {
 	/* Positioning */
@@ -91,7 +85,6 @@ body{
 #user-points {
 	/* Positioning */
 	position: relative;
-	padding: 10px;
 	text-align: center;
 
 	/* Font */
@@ -108,13 +101,12 @@ body{
 		background-color: blue;
 		height:100vh;
 	}
-	header{
+	.header{
 		font-size: 2rem;
 	}
-	body{
+	.main-body{
 		margin-left: 2rem;
 		margin-right: 2rem;
-		font-size: 3rem;
 		text-align: center;
 		margin-top: 3rem;
 		padding: 5%;
@@ -136,21 +128,38 @@ body{
 		background-color: red;
 		height:100vh;
 	}
-	header{
-		font-size: 2rem;
+	.header{
+		margin-top: 10%;
+		font-size: 2.5rem;
+		margin-bottom: 1em;
 	}
-	body{
-		margin-top: 50%;
+	.main-body{
 		margin-left: 2rem;
 		margin-right: 2rem;
-		font-size: 3rem;
 		text-align: center;
 	}
 	button{
-		font-size: 2rem;
+		font-size: 3em;
 	}
 	input{
-		font-size:1em;
+		margin-top: 2em;
+		margin-bottom: 2em;
+		font-size:2rem;
+	}
+	#user-points{
+		font-size: 6em;
+	}
+	p.field-contents{
+		font-size: 2rem;
+	}
+	h3.field-label{
+		font-size: 3rem;
+	}
+	label.field-label{
+		font-size: 3rem;
+	}
+	#logout {
+		font-size: 3em;
 	}
 
 }
