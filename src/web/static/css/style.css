@@ -14,8 +14,8 @@ html {
 	/* Background */
 	margin: auto;
 	padding-bottom: 2rem;
-	width: 80%;
 	background: linear-gradient(152.52deg, #423245 7.97%, #5C4175 105.87%);
+	width: 80%;
 	filter: drop-shadow(10px 10px 50px rgba(0, 0, 0, 0.5));
 	border-radius: 50px;
 
@@ -94,7 +94,7 @@ button:hover {
 }
 
 /* Style modification here applies to the largest screen size (desktop view) */
-@media (min-width: 992px) {
+@media (min-width: 1025px) {
 
 	html {
 		/* Temporary: for visualing the current view */
@@ -121,7 +121,7 @@ button:hover {
 }
 
 /* Style modification here applies to the medium screen size (tablet view) */
-@media (min-width: 769px) and (max-width: 991px) {
+@media (min-width: 781px) and (max-width: 1024px) {
 
 	html {
 		/* Temporary: for visualing the current view */
@@ -162,4 +162,24 @@ button:hover {
 		font-size: 3em;
 	}
 
+}
+/* Style modification here applies to the mobile screen size (mobile view) */
+@media (max-width: 780px) {
+	html{
+		
+	}
+	form{
+		padding-left:20vw;
+	}
+	.header{
+		font-size: 4vi;
+	}
+	input{
+		font-size: 3vi;
+	}
+	label.field-label{
+		font-size: 3vi;
+	}
+	
+	
 }
