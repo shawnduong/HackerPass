@@ -103,6 +103,7 @@ button:hover {
 	}
 	.header{
 		font-size: 2rem;
+		margin-bottom: 2rem;
 	}
 	.main-body{
 		margin-left: 2rem;
@@ -112,10 +113,15 @@ button:hover {
 		padding: 5%;
 	}
 	button{
-		font-size: 3rem;
+		margin-top: 2vi;
+		font-size: 2rem;
 	}
 	input{
 		font-size:1em;
+		margin-top: 2vi;
+	}
+	label.field-label{
+		font-size: 3vi;
 	}
 
 }
@@ -178,8 +184,11 @@ button:hover {
 		font-size: 3vi;
 	}
 	label.field-label{
-		font-size: 3vi;
+		font-size: 4vi;
+	}	
+	button{
+		margin-top: 1vi;
+		font-size: 4vi;
 	}
-	
 	
 }
