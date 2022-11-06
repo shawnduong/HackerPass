@@ -13,6 +13,7 @@ html {
 .module{
 	/* Background */
 	margin: auto;
+	text-align: center;
 	padding-bottom: 2rem;
 	background: linear-gradient(152.52deg, #423245 7.97%, #5C4175 105.87%);
 	width: 80%;
