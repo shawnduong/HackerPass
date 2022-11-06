@@ -56,9 +56,9 @@ p.field-contents {
 	font-size: 18px;
 	line-height: 8px;
 }
-.button{
+button{
 	font-weight: 1em;
-	padding: 1em 2em;
+	padding: 0.5em 1em;
 	text-align: center;
 	font-size: 12pt;
 	margin-top: 2vh;
@@ -75,11 +75,12 @@ button:hover {
 	text-align: center;
 }
 
-#logout {
+a.logout {
 	/* Font */
 	font-weight: 700;
 	font-style: italic;
 	color: #9665BA;
+	font-size: 2rem;
 }
 
 #user-points {
@@ -101,8 +102,14 @@ button:hover {
 		background-color: blue;
 		height:100vh;
 	}
+	.module{
+		margin-top: 3rem;
+		width: 50%;
+
+	}
 	.header{
 		font-size: 2rem;
+		margin-bottom: 1em;
 	}
 	.main-body{
 		margin-left: 2rem;
@@ -111,11 +118,17 @@ button:hover {
 		margin-top: 3rem;
 		padding: 5%;
 	}
-	button{
-		font-size: 3rem;
-	}
 	input{
+		margin-top: 1em;
 		font-size:1em;
+		margin-bottom: 1em;
+	}
+	label.fieldlabel{
+		font-size: 4em;
+	}
+	button{
+		margin-top: 1em;
+		font-size: 2rem;
 	}
 
 }
@@ -129,7 +142,7 @@ button:hover {
 		height:100vh;
 	}
 	.header{
-		margin-top: 10%;
+		margin-top: 5%;
 		font-size: 2.5rem;
 		margin-bottom: 1em;
 	}
@@ -138,12 +151,9 @@ button:hover {
 		margin-right: 2rem;
 		text-align: center;
 	}
-	button{
-		font-size: 3em;
-	}
 	input{
-		margin-top: 2em;
-		margin-bottom: 2em;
+		margin-top: 1em;
+		margin-bottom: 1em;
 		font-size:2rem;
 	}
 	#user-points{
@@ -151,6 +161,7 @@ button:hover {
 	}
 	p.field-contents{
 		font-size: 2rem;
+		margin-bottom: 2em;
 	}
 	h3.field-label{
 		font-size: 3rem;
@@ -158,19 +169,14 @@ button:hover {
 	label.field-label{
 		font-size: 3rem;
 	}
-	#logout {
-		font-size: 3em;
+	button {
+		font-size: 2em;
 	}
 
 }
-/* Style modification here applies to the mobile screen size (mobile view) */
+/* Style modification here applies to the smaller screen size (mobile view) */
 @media (max-width: 780px) {
-	html{
-		
-	}
-	form{
-		padding-left:20vw;
-	}
+
 	.header{
 		font-size: 4vi;
 	}
@@ -180,6 +186,9 @@ button:hover {
 	label.field-label{
 		font-size: 3vi;
 	}
-	
+	.module{
+		margin-top: 3rem;
+		text-align: center;
+	}
 	
 }
