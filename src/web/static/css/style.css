@@ -179,6 +179,7 @@ a.logout {
 @media (max-width: 780px) {
 
 	.header{
+		margin-top: 2em;
 		font-size: 4vi;
 	}
 	input{
