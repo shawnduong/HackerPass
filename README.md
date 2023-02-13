@@ -1,5 +1,3 @@
 # HackerPass
 
-HackerPass is an RFID-based authentication system for large events such as hackathons.
-
-**This project is in development and not ready for use.**
+**HackerPass has been rebranded to Badger. Future development will occur on [shawnduong/badger](https://github.com/shawnduong/badger).**
